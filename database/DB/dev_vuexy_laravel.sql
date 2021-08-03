@@ -203,6 +203,29 @@ INSERT INTO `migrations` VALUES (16, '2021_07_21_090809_create_role_has_template
 INSERT INTO `migrations` VALUES (17, '2021_07_21_092303_create_component_parameter_apis_table', 6);
 
 -- ----------------------------
+-- Table structure for roles
+-- ----------------------------
+DROP TABLE IF EXISTS `roles`;
+CREATE TABLE `roles`  (
+  `id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `merchant_id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `guard_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp(0) NULL DEFAULT NULL,
+  `updated_at` timestamp(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `roles_name_guard_name_unique`(`name`, `guard_name`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of roles
+-- ----------------------------
+INSERT INTO `roles` VALUES ('09b9afb7-850f-4471-a30c-303342efef59', '1', 'SPV-Transmart', 'web', '2021-07-21 09:54:00', '2021-07-21 09:54:00');
+INSERT INTO `roles` VALUES ('9de0041f-fa8d-4d40-896b-e3234dc5ac42', NULL, 'SPV', 'web', '2021-07-09 09:07:09', '2021-07-09 09:07:09');
+INSERT INTO `roles` VALUES ('ac11cd55-2897-4ce0-ae33-a107ea9e880a', NULL, 'super-admin', 'web', '2021-07-09 08:18:13', '2021-07-09 08:18:13');
+
+
+-- ----------------------------
 -- Table structure for permissions
 -- ----------------------------
 DROP TABLE IF EXISTS `permissions`;
@@ -361,27 +384,6 @@ INSERT INTO `role_has_templates` VALUES ('2', '09b9afb7-850f-4471-a30c-303342efe
 INSERT INTO `role_has_templates` VALUES ('3', '09b9afb7-850f-4471-a30c-303342efef59', 3);
 INSERT INTO `role_has_templates` VALUES ('4', '09b9afb7-850f-4471-a30c-303342efef59', 4);
 
--- ----------------------------
--- Table structure for roles
--- ----------------------------
-DROP TABLE IF EXISTS `roles`;
-CREATE TABLE `roles`  (
-  `id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `merchant_id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `guard_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp(0) NULL DEFAULT NULL,
-  `updated_at` timestamp(0) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX `roles_name_guard_name_unique`(`name`, `guard_name`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of roles
--- ----------------------------
-INSERT INTO `roles` VALUES ('09b9afb7-850f-4471-a30c-303342efef59', '1', 'SPV-Transmart', 'web', '2021-07-21 09:54:00', '2021-07-21 09:54:00');
-INSERT INTO `roles` VALUES ('9de0041f-fa8d-4d40-896b-e3234dc5ac42', NULL, 'SPV', 'web', '2021-07-09 09:07:09', '2021-07-09 09:07:09');
-INSERT INTO `roles` VALUES ('ac11cd55-2897-4ce0-ae33-a107ea9e880a', NULL, 'super-admin', 'web', '2021-07-09 08:18:13', '2021-07-09 08:18:13');
 
 -- ----------------------------
 -- Table structure for template_details
