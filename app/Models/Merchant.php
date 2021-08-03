@@ -11,4 +11,5 @@ class Merchant extends Model
     use HasFactory,RecordSignature;
 
     protected $guarded = [];
+    
 }
