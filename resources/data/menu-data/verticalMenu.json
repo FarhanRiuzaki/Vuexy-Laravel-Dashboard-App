@@ -1,0 +1,57 @@
+{
+  "menu": [
+    {
+      "name": "Dashboards",
+      "badge": "2",
+      "badgeClass": "badge badge-light-warning badge-pill ml-auto mr-1",
+      "icon": "home",
+      "slug": "",
+      "submenu": [
+        {
+          "url": "dashboard/analytics",
+          "name": "Analytics",
+          "icon": "circle",
+          "slug": "dashboard-analytics"
+        },
+        {
+          "url": "/",
+          "name": "eCommerce",
+          "icon": "circle",
+          "slug": "dashboard-ecommerce"
+        },
+        {
+          "url": "dashboard/search",
+          "name": "Search",
+          "icon": "circle",
+          "slug": "search"
+        }
+      ]
+    },
+    {
+      "navheader": "Auth Apps",
+      "slug": "",
+      "permission": ["permission.index","role.index","user.index"]
+    },
+    {
+      "url": "permissions",
+      "name": "Permission",
+      "icon": "sidebar",
+      "slug": "permissions",
+      "permission": "permission.index"
+    },
+    {
+      "url": "roles",
+      "name": "Role",
+      "icon": "briefcase",
+      "slug": "roles",
+      "permission": "role.index"
+    },
+    {
+      "url": "users",
+      "name": "User",
+      "icon": "user-check",
+      "slug": "users",
+      "permission": "user.index"
+    }
+  ]
+}

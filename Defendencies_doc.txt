@@ -1,0 +1,10 @@
+- ACL Spatie            : https://www.itsolutionstuff.com/post/laravel-8-user-roles-and-permissions-tutorialexample.html
+- DataTtable Yajra      : https://github.com/yajra/laravel-datatables
+                        : composer require yajra/laravel-datatables:^1.5
+- Doc Vuexy             : https://pixinvent.com/demo/vuexy-html-bootstrap-admin-template/documentation/documentation-laravel-acl.html 
+- laravel-debugbar      : https://github.com/barryvdh/laravel-debugbar
+- SVG Icon              : https://github.com/blade-ui-kit/blade-icons
+- HTML Collection       : https://laravelcollective.com/docs/6.x/html
+- Nested Array          : http://creative-punch.net/2014/01/creating-nested-array-items-parent-ids/
+- OCR                   : https://reposhub.com/php/miscellaneous/alimranahmed-LaraOCR.html
+- ApexChart             : https://apexcharts.com/javascript-chart-demos/pie-charts/simple-donut/

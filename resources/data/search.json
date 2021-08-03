@@ -1,0 +1,7 @@
+{
+  "listItems": [
+    { "name": "Role Management", "url": "roles", "icon": "briefcase" },
+    { "name": "Permission Management", "url": "permissions", "icon": "sidebar" },
+    { "name": "User Management", "url": "users", "icon": "user-check" }
+  ]
+}
