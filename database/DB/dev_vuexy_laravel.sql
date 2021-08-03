@@ -203,6 +203,37 @@ INSERT INTO `migrations` VALUES (16, '2021_07_21_090809_create_role_has_template
 INSERT INTO `migrations` VALUES (17, '2021_07_21_092303_create_component_parameter_apis_table', 6);
 
 -- ----------------------------
+-- Table structure for permissions
+-- ----------------------------
+DROP TABLE IF EXISTS `permissions`;
+CREATE TABLE `permissions`  (
+  `id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `guard_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp(0) NULL DEFAULT NULL,
+  `updated_at` timestamp(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `permissions_name_guard_name_unique`(`name`, `guard_name`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of permissions
+-- ----------------------------
+INSERT INTO `permissions` VALUES ('15c87aa0-3a52-40ca-b61b-ccb08b0cd274', 'role.index', 'web', '2021-07-09 08:50:50', '2021-07-13 03:19:17');
+INSERT INTO `permissions` VALUES ('16cb3bd2-f26a-47e9-a336-b5e08345e250', 'user.edit', 'web', '2021-07-09 08:50:50', '2021-07-09 08:50:50');
+INSERT INTO `permissions` VALUES ('2bdb59cf-d48d-4761-aa01-6db2aec64446', 'permission.index', 'web', '2021-07-14 03:02:20', '2021-07-14 03:02:20');
+INSERT INTO `permissions` VALUES ('31fc8b6f-6634-45a3-9fe3-aefad04cc486', 'user.create', 'web', '2021-07-09 08:50:50', '2021-07-09 08:50:50');
+INSERT INTO `permissions` VALUES ('752747dc-ebdd-422e-b333-8fe52092632c', 'user.index', 'web', '2021-07-09 08:50:50', '2021-07-09 08:50:50');
+INSERT INTO `permissions` VALUES ('94ef3d6c-49f6-4871-b9cc-920136cc50b4', 'permission.delete', 'web', '2021-07-09 08:50:50', '2021-07-09 08:50:50');
+INSERT INTO `permissions` VALUES ('9cc4bec0-97a6-4dc9-bc94-07e611ba7dab', 'permission.edit', 'web', '2021-07-09 08:50:50', '2021-07-09 08:50:50');
+INSERT INTO `permissions` VALUES ('b77f3f77-ff68-4b11-bf34-b85f0fd71c9b', 'role.create', 'web', '2021-07-14 03:26:30', '2021-07-14 03:26:30');
+INSERT INTO `permissions` VALUES ('b79f4b1c-6701-4cad-98c2-0fe72add1e92', 'permission.create', 'web', '2021-07-15 07:14:20', '2021-07-15 07:14:20');
+INSERT INTO `permissions` VALUES ('bf33d06c-f55c-41bf-8a99-af6854629598', 'role.delete', 'web', '2021-07-14 03:26:38', '2021-07-14 03:26:38');
+INSERT INTO `permissions` VALUES ('d0a6b07e-a02f-4057-8111-2f26f726f321', 'user.delete', 'web', '2021-07-09 08:50:50', '2021-07-09 08:50:50');
+INSERT INTO `permissions` VALUES ('ef73c9ba-b6e2-4950-9db1-79d0d27f7487', 'role.edit', 'web', '2021-07-09 08:50:50', '2021-07-09 08:50:50');
+
+
+-- ----------------------------
 -- Table structure for model_has_permissions
 -- ----------------------------
 DROP TABLE IF EXISTS `model_has_permissions`;
@@ -269,35 +300,6 @@ CREATE TABLE `password_resets`  (
   INDEX `password_resets_email_index`(`email`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
--- ----------------------------
--- Table structure for permissions
--- ----------------------------
-DROP TABLE IF EXISTS `permissions`;
-CREATE TABLE `permissions`  (
-  `id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `guard_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp(0) NULL DEFAULT NULL,
-  `updated_at` timestamp(0) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX `permissions_name_guard_name_unique`(`name`, `guard_name`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of permissions
--- ----------------------------
-INSERT INTO `permissions` VALUES ('15c87aa0-3a52-40ca-b61b-ccb08b0cd274', 'role.index', 'web', '2021-07-09 08:50:50', '2021-07-13 03:19:17');
-INSERT INTO `permissions` VALUES ('16cb3bd2-f26a-47e9-a336-b5e08345e250', 'user.edit', 'web', '2021-07-09 08:50:50', '2021-07-09 08:50:50');
-INSERT INTO `permissions` VALUES ('2bdb59cf-d48d-4761-aa01-6db2aec64446', 'permission.index', 'web', '2021-07-14 03:02:20', '2021-07-14 03:02:20');
-INSERT INTO `permissions` VALUES ('31fc8b6f-6634-45a3-9fe3-aefad04cc486', 'user.create', 'web', '2021-07-09 08:50:50', '2021-07-09 08:50:50');
-INSERT INTO `permissions` VALUES ('752747dc-ebdd-422e-b333-8fe52092632c', 'user.index', 'web', '2021-07-09 08:50:50', '2021-07-09 08:50:50');
-INSERT INTO `permissions` VALUES ('94ef3d6c-49f6-4871-b9cc-920136cc50b4', 'permission.delete', 'web', '2021-07-09 08:50:50', '2021-07-09 08:50:50');
-INSERT INTO `permissions` VALUES ('9cc4bec0-97a6-4dc9-bc94-07e611ba7dab', 'permission.edit', 'web', '2021-07-09 08:50:50', '2021-07-09 08:50:50');
-INSERT INTO `permissions` VALUES ('b77f3f77-ff68-4b11-bf34-b85f0fd71c9b', 'role.create', 'web', '2021-07-14 03:26:30', '2021-07-14 03:26:30');
-INSERT INTO `permissions` VALUES ('b79f4b1c-6701-4cad-98c2-0fe72add1e92', 'permission.create', 'web', '2021-07-15 07:14:20', '2021-07-15 07:14:20');
-INSERT INTO `permissions` VALUES ('bf33d06c-f55c-41bf-8a99-af6854629598', 'role.delete', 'web', '2021-07-14 03:26:38', '2021-07-14 03:26:38');
-INSERT INTO `permissions` VALUES ('d0a6b07e-a02f-4057-8111-2f26f726f321', 'user.delete', 'web', '2021-07-09 08:50:50', '2021-07-09 08:50:50');
-INSERT INTO `permissions` VALUES ('ef73c9ba-b6e2-4950-9db1-79d0d27f7487', 'role.edit', 'web', '2021-07-09 08:50:50', '2021-07-09 08:50:50');
 
 -- ----------------------------
 -- Table structure for role_has_permissions

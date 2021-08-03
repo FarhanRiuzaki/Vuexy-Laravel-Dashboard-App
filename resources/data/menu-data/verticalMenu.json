@@ -28,6 +28,10 @@
       ]
     },
     {
+      "navheader": "Master Dashboard",
+      "slug": ""
+    },
+    {
       "navheader": "Auth Apps",
       "slug": "",
       "permission": ["permission.index","role.index","user.index"]
