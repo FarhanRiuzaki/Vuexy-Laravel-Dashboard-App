@@ -18,6 +18,8 @@ class CreateTemplatesTable extends Migration
             $table->string('name')->nullable();
             $table->string('icon')->nullable();
             $table->text('description')->nullable();
+            $table->integer('level')->nullable();
+            $table->integer('parent')->nullable();
             $table->timestamps();
         });
         

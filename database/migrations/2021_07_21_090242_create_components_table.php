@@ -17,7 +17,9 @@ class CreateComponentsTable extends Migration
             $table->uuid('id')->primary();
             $table->uuid('page_id');
             $table->string('api_name');
+            $table->string('api_type');
             $table->string('type')->nullable();
+            $table->string('type_desc')->nullable();
             $table->string('header')->nullable();
             $table->string('column_size')->nullable();
             $table->string('action')->nullable();
