@@ -16,6 +16,7 @@ class ParamterApi extends Migration
         Schema::table('component_parameter_apis',  function(Blueprint $table){
             $table->integer('type')->after('created_at')->nullable();
             $table->integer('updated_by')->after('updated_at')->nullable();
+            
         });
     }
 
