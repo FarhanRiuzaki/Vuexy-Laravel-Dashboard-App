@@ -8,7 +8,11 @@
 
 Laravel has a set of requirements in order to ron smoothly in specific environment. Please see [requirements](https://laravel.com/docs/7.x#server-requirements) section in Laravel documentation.
 
-Metronic similarly uses additional plugins and frameworks, so ensure You have [Composer](https://getcomposer.org/) and [Node](https://nodejs.org/) installed on Your machine.
+Vuexy similarly uses additional plugins and frameworks, so ensure You have [Composer](https://getcomposer.org/) and [Node](https://nodejs.org/) installed on Your machine.
+
+Untuk instalasi Vuexy, dapat di baca di dokumentasi berikut:
+
+[Vuexy Documentation Laravel](https://pixinvent.com/demo/vuexy-vuejs-admin-dashboard-template/documentation/guide/laravel-integration/installation.html#guide)
 
 Assuming your machine meets all requirements - let's process to installation of Metronic Laravel integration (skeleton).
 
