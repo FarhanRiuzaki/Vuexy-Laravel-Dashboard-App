@@ -15,6 +15,7 @@ class Userchange2 extends Migration
     {
         Schema::table('users',  function(Blueprint $table){
             $table->string('username')->after('name');
+            $table->string('status')->after('remember_token');
         });
     }
 
