@@ -35,10 +35,9 @@ class PermissionTableSeeder extends Seeder
          }
 
         // default role
-        // $role = Role::create([
-        //     'id'    => 2,
-        //     'name'  => 'super-admin'
-        // ]);
+        $role = Role::create([
+            'name'  => 'super-admin'
+        ]);
         $role = Role::where('name', 'super-admin')->first();
         
         // sync permissions to role
