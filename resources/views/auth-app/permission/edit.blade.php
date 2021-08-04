@@ -5,7 +5,7 @@
 <div class="row">
         <div class="col-md-6">
                 <button onclick="CheckValidation();" type="submit" id="btn-submit" class="btn font-weight-bold btn-block btn-primary">
-                        Update Permission
+                        Update
                 </button>
         </div>
         <div class="col-md-6">

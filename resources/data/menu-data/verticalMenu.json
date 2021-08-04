@@ -32,6 +32,20 @@
       "slug": ""
     },
     {
+      "url": "channels",
+      "name": "Master Channel",
+      "icon": "grid",
+      "slug": "channels",
+      "permission": "channel.index"
+    },
+    {
+      "url": "merchants",
+      "name": "Master Merchant",
+      "icon": "package",
+      "slug": "merchants",
+      "permission": "merchant.index"
+    },
+    {
       "navheader": "Auth Apps",
       "slug": "",
       "permission": ["permission.index","role.index","user.index"]

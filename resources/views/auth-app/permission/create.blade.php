@@ -3,7 +3,7 @@
 {{ Form::inputText('Permission: ', 'permission', null, null, ['placeholder' => 'permission name', 'required']) }}
 
 <button onclick="CheckValidation();" type="submit" id="btn-submit" class="btn font-weight-bold btn-block btn-primary">
-        Submit Permission
+        Submit
 </button>
 
 {!! Form::close() !!}

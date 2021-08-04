@@ -20,6 +20,8 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\Master\ChannelController;
+use App\Http\Controllers\Master\MerchantController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -44,11 +46,18 @@ Route::get('/', [DashboardController::class,'dashboardEcommerce'])->name('dashbo
 Auth::routes(['verify' => true]);
 // AUTH By Farhan
 Route::get('permissions/datatable',[PermissionController::class,'datatable'])->name('permissions.datatable');
-Route::get('users/update-status/{id}',[UserController::class, 'updateStatus'])->name('users.updateStatus'); //update status user
+Route::get('users/update-status/{id}',[UserController::class, 'updateStatus'])->name('users.updateStatus');
+Route::get('channels/datatable', [ChannelController::class, 'datatable'])->name('channels.datatable'); //datatable 'channel'
+Route::get('merchants/datatable', [MerchantController::class, 'datatable'])->name('merchants.datatable'); //datatable 'merchant'
 
 Route::resource('roles',RoleController::class);
 Route::resource('permissions',PermissionController::class);
 Route::resource('users',UserController::class);
+
+// MASTER DASHBOARD ROUTE
+Route::resource('channels', ChannelController::class);
+Route::resource('merchants', MerchantController::class);
+
 // Auth::routes(['verify' => true]);
 
 // ROUTE UNTUK DASHBOARD DINAMIS 

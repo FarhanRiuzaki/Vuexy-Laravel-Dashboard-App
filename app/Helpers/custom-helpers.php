@@ -2,6 +2,7 @@
 
 use App\Models\Permission;
 use App\Models\Role;
+use Carbon\Carbon;
 use Illuminate\Support\Str;
 
 function welcome_word() {
@@ -105,7 +106,7 @@ function savePermission($argv)
         $type = str_replace('Controller', '', $type);
         $type = Str::of($type)->kebab();
         $type = Str::lower($type);
-        // dd($argv);
+        // dd($type);
         if(isset($argv[2])){
             // if($argv[2] == '-r'){
                 $permissions = [
@@ -248,4 +249,9 @@ function topThreeAmt($item, $merchant)
         </div>';
     }
     return $html;
+}
+
+function createdAt($created)
+{
+    return date('Y-m-d H:i:s', strtotime($created));
 }
