@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Merchant extends Model
 {
-    use HasFactory,RecordSignature, UUID;
+    use HasFactory,UUID;
     protected $primaryKey = 'id';
     public $incrementing = false;
 

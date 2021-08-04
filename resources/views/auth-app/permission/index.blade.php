@@ -52,7 +52,11 @@
                 {{-- Header --}}
                 <div class="card-header border-bottom p-1">
                     <div class="head-label">
-                        <h4 class="mb-0">Add Permission</h4>
+                        @if(isset($permission_edit))
+                            <h4 class="mb-0">Edit Permission</h4>
+                        @else
+                            <h4 class="mb-0">Add Permission</h4>
+                        @endif
                     </div>
                 </div>
                 {{-- Body --}}
