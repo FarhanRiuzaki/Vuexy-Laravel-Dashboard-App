@@ -52,7 +52,7 @@
             {{-- Header --}}
             <div class="card-header border-bottom p-1">
                 <div class="head-label">
-                    <h4 class="mb-0">List merchant</h4>
+                    <h4 class="mb-0">List Merchant</h4>
                 </div>
             </div>
             {{-- Body --}}
@@ -71,7 +71,6 @@
             </div>
         </div>
     </div>
-
 </div>
 @endsection
 

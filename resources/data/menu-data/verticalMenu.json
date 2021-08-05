@@ -1,8 +1,10 @@
 {
   "menu": [
+    
     {
       "navheader": "Master Dashboard",
-      "slug": ""
+      "slug": "",
+      "permission":  ["channel.index", "merchant.index"]
     },
     {
       "url": "channels",
@@ -17,6 +19,10 @@
       "icon": "package",
       "slug": "merchants",
       "permission": "merchant.index"
+    },
+    {
+      "navheader": "Master Template",
+      "slug": ""
     },
     {
       "navheader": "Auth Apps",
