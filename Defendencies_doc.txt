@@ -8,3 +8,27 @@
 - Nested Array          : http://creative-punch.net/2014/01/creating-nested-array-items-parent-ids/
 - OCR                   : https://reposhub.com/php/miscellaneous/alimranahmed-LaraOCR.html
 - ApexChart             : https://apexcharts.com/javascript-chart-demos/pie-charts/simple-donut/
+
+
+#CATATAN MIGRASI GIT 
+
+ROLE & PERMISSION 
+-Check vendor Role & Permission 
+    tambahkan UUID agar otomatis membaca UUID bukan id
+    
+    ROLE        : C:\NEW LARAVEL\Project\dev_vuexy_laravel\vendor\spatie\laravel-permission\src\Models\Role.php
+    PERMISSION  : C:\NEW LARAVEL\Project\dev_vuexy_laravel\vendor\spatie\laravel-permission\src\Models\Permission.php
+
+-SVG 
+C:\NEW LARAVEL\Project\dev_vuexy_laravel\vendor\blade-ui-kit\blade-icons\src\Svg.php 
+    ubah 
+        private $contents 
+    ke 
+        public $contents 
+
+- Auto Permission 
+    Controller -r 
+
+    PATH: C:\NEW LARAVEL\Project\dev_vuexy_laravel\vendor\symfony\console\Input\ArgvInput.php
+
+- 2 Traits in one model 

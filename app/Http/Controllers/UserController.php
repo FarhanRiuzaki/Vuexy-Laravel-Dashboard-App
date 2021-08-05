@@ -145,6 +145,7 @@ class UserController extends Controller
         }else{
             unset($input['password']);
         }
+        // dd($request->All());
 
         $user = User::find($id);
         $user->update($input);

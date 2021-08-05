@@ -1,35 +1,10 @@
 {
   "menu": [
-    {
-      "name": "Dashboards",
-      "badge": "2",
-      "badgeClass": "badge badge-light-warning badge-pill ml-auto mr-1",
-      "icon": "home",
-      "slug": "",
-      "submenu": [
-        {
-          "url": "dashboard/analytics",
-          "name": "Analytics",
-          "icon": "circle",
-          "slug": "dashboard-analytics"
-        },
-        {
-          "url": "/",
-          "name": "eCommerce",
-          "icon": "circle",
-          "slug": "dashboard-ecommerce"
-        },
-        {
-          "url": "dashboard/search",
-          "name": "Search",
-          "icon": "circle",
-          "slug": "search"
-        }
-      ]
-    },
+    
     {
       "navheader": "Master Dashboard",
-      "slug": ""
+      "slug": "",
+      "permission":  ["channel.index", "merchant.index"]
     },
     {
       "url": "channels",
@@ -44,6 +19,10 @@
       "icon": "package",
       "slug": "merchants",
       "permission": "merchant.index"
+    },
+    {
+      "navheader": "Master Template",
+      "slug": ""
     },
     {
       "navheader": "Auth Apps",
