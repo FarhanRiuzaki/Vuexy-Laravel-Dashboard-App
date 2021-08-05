@@ -3,16 +3,16 @@
 namespace App\Http\Controllers\Master;
 
 use App\Http\Controllers\Controller;
-use App\Models\Channel;
-use App\Models\Merchant;
+use App\Models\Page;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
-class MerchantController extends Controller
+
+class PageTemplateController extends Controller
 {
-    private $page_title         = "Merchant Management";
-    private $route              = "merchants";
-    private $permission         = "merchant";
+    private $page_title         = "Page Template";
+    private $route              = "pages";
+    private $permission         = "page";
     private $pageConfigs        = ['pageHeader' => false];
 
     function __construct()
@@ -30,16 +30,12 @@ class MerchantController extends Controller
      */
     public function index()
     {
-        // mengambil data field name, id dari table 'channel'
-        $channel = Channel::pluck('name', 'id');
-        
-        return view('master.merchant.index', [
+        return view('master.page.index', [
             // 'breadcrumbs' => $breadcrumbs
             'pageConfigs'   => $this->pageConfigs,
             'page_title'    => $this->page_title,
             'permission'    => $this->permission,
             'route'         => $this->route,
-            'channel'       => $channel
         ]);
     }
 
@@ -62,16 +58,17 @@ class MerchantController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'channel_id'    => 'required',
             'code'          => 'required',
-            'name'          => 'required',
+            'url'           => 'required',
             'description'   => 'required'
         ]);
+        // dd($request->All());
 
-        $channel = Merchant::create($request->All());
+        $page = Page::create($request->All());
+
 
         return redirect()->route($this->route . '.index')
-        ->with(toaster('Merchant created successfully', 'success', 'success'));
+        ->with(toaster('Page created successfully', 'success', 'success'));
     }
 
     /**
@@ -93,17 +90,14 @@ class MerchantController extends Controller
      */
     public function edit($id)
     {
-        $channel        = Channel::pluck('name', 'id');
-        $merchant_edit  = Merchant::find($id);
+        $page_edit    = Page::find($id);
 
-        return view('master.merchant.index', [
+        return view('master.page.index', [
             // 'breadcrumbs' => $breadcrumbs
             'pageConfigs'   => $this->pageConfigs,
             'page_title'    => $this->page_title,
-            'permission'    => $this->permission,
             'route'         => $this->route,
-            'channel'       => $channel,
-            'merchant_edit' => $merchant_edit
+            'page_edit'     => $page_edit
         ]);
     }
 
@@ -117,19 +111,18 @@ class MerchantController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'channel_id'    => 'required',
             'code'          => 'required',
-            'name'          => 'required',
+            'url'          => 'required',
             'description'   => 'required'
         ]);
 
         $input = $request->all();
 
-        $channel = Merchant::find($id);
-        $channel->update($input);
+        $page = Page::find($id);
+        $page->update($input);
 
         return redirect()->route($this->route . '.index')
-        ->with(toaster('Merchant updated successfully', 'success', 'success'));
+        ->with(toaster('Page updated successfully', 'success', 'success'));
     }
 
     /**
@@ -140,10 +133,10 @@ class MerchantController extends Controller
      */
     public function destroy($id)
     {
-        $delete_merchant = Merchant::find($id);
-        $delete_merchant->delete() == true ?
+        $delete_page = Page::find($id);
+        $delete_page->delete() == true ?
             $return =
-        ['code' => 'success', 'msg' => 'Merchant deleted successfully']
+        ['code' => 'success', 'msg' => 'Page deleted successfully']
         : $return = ['code' => 'error', 'msg' => 'Something went wrong!'];
 
         return response()->json($return);
@@ -153,31 +146,31 @@ class MerchantController extends Controller
     {
         if ($request->ajax()) {
             $this->type = $request['type'];
-            $model = Merchant::query()->orderBy('created_at', 'DESC')->get();
+            $model = Page::query()->orderBy('created_at', 'DESC')->get();
 
             return DataTables::of($model)
-                ->addIndexColumn()
-                ->addColumn('created_at', function ($data) {
-                    return createdAt($data->created_at);
-                })
-                ->addColumn('action', function ($data) {
-                    $button = '';
-                    if (auth()->user()->can($this->permission . '.edit')) {
-                        $button .= ' <a href="' . route($this->route . '.edit', $data->id) . '" class="btn btn-icon btn-primary btn-sm"  data-toggle="tooltip" title="Edit">
-                        ' . SVGI('bi-pencil-square') . '
-                        </a>';
+            ->addIndexColumn()
+            ->addColumn('created_at', function ($data) {
+                return createdAt($data->created_at);
+            })
+            ->addColumn('action', function ($data) {
+                $button = '';
+                if (auth()->user()->can($this->permission . '.edit')) {
+                    $button .= ' <a href="' . route($this->route . '.edit', $data->id) . '" class="btn btn-icon btn-primary btn-sm"  data-toggle="tooltip" title="Edit">
+                    ' . SVGI('bi-pencil-square') . '
+                    </a>';
+                }
+                if ($this->type == 'create') {
+                    if (auth()->user()->can($this->permission . '.delete')) {
+                        $button .= ' <button class="btn btn-icon btn-sm btn-delete btn-danger" data-remote="' . route($this->route . '.destroy', $data->id) . '" data-toggle="tooltip" title="Delete">
+                            ' . SVGI('bi-trash') . '
+                        </button>';
                     }
-                    if ($this->type == 'create') {
-                        if (auth()->user()->can($this->permission . '.delete')) {
-                            $button .= ' <button class="btn btn-icon btn-sm btn-delete btn-danger" data-remote="' . route($this->route . '.destroy', $data->id) . '" data-toggle="tooltip" title="Delete">
-                                    ' . SVGI('bi-trash') . '
-                                </button>';
-                        }
-                    }
-                    return $button;
-                })
-                ->rawColumns(['created_at', 'action'])
-                ->make(true);
+                }
+                return $button;
+            })
+            ->rawColumns(['created_at', 'action'])
+            ->make(true);
         }
     }
 }
