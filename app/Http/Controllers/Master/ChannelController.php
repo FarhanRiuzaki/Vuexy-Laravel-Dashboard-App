@@ -145,6 +145,7 @@ class ChannelController extends Controller
     public function datatable(Request $request)
     {
         if ($request->ajax()) {
+            $this->type = $request['type'];
             $model = Channel::query()->orderBy('created_at', 'DESC')->get();
 
             return DataTables::of($model)
@@ -159,13 +160,13 @@ class ChannelController extends Controller
                         ' . SVGI('bi-pencil-square') . '
                         </a>';
                     }
-                    // if ($this->type == 'create') {
-                    if (auth()->user()->can($this->permission . '.delete')) {
-                        $button .= ' <button class="btn btn-icon btn-sm btn-delete btn-danger" data-remote="' . route($this->route . '.destroy', $data->id) . '" data-toggle="tooltip" title="Delete">
-                                ' . SVGI('bi-trash') . '
-                            </button>';
+                    if ($this->type == 'create') {
+                        if (auth()->user()->can($this->permission . '.delete')) {
+                            $button .= ' <button class="btn btn-icon btn-sm btn-delete btn-danger" data-remote="' . route($this->route . '.destroy', $data->id) . '" data-toggle="tooltip" title="Delete">
+                                    ' . SVGI('bi-trash') . '
+                                </button>';
+                        }
                     }
-                    // }
                     return $button;
                 })
                 ->rawColumns(['created_at', 'action'])
