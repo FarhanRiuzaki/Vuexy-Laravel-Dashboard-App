@@ -22,7 +22,22 @@
     },
     {
       "navheader": "Master Template",
-      "slug": ""
+      "slug": "",
+      "permission":  ["page-template.index", "component-template.index"]
+    },
+    {
+      "url": "pages",
+      "name": "Page",
+      "icon": "file-text",
+      "slug": "pages",
+      "permission": "page-template.index"
+    },
+    {
+      "url": "components",
+      "name": "Component",
+      "icon": "file-text",
+      "slug": "components",
+      "permission": "component-template.index"
     },
     {
       "navheader": "Auth Apps",
