@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
-use App\Traits\UUID;
+use App\Traits\RecordSignatureUUID;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Component extends Model
 {
-    use HasFactory, UUID;
+    use HasFactory, RecordSignatureUUID;
 
     protected $primaryKey   = 'id';
     public $incrementing    = false;
