@@ -80,7 +80,7 @@
                 {{-- Body --}}
                 <div class="card-body pt-2">
                     <div class="table-responsive">
-                        <table class="table table-bordered tableParam" id="tableParam">
+                        <table class="table table-bordered tableParam" id='tableParam'>
                             <thead>
                                 <tr class="text-center">
                                     <th width='5px' class="font-medium-1">No</th>
@@ -93,8 +93,8 @@
                             </thead>
                             <tbody>
                             @if ($comp_param_api->count() == 0)
-                                <tr>
-                                    <td colspan="4">No data to display.</td>
+                                <tr id='no-data'>
+                                    <td colspan="4" class="text-center">No data to display.</td>
                                 </tr>
                             @endif
 
@@ -131,11 +131,21 @@
 
 @push('page-script')
 <script>
-    var no = document.getElementById("tableParam").rows.length;
-    no--;
-    console.log(no);
+    var first_row = $('table tr:last td').text();
+
+    if(first_row = "No data to display."){
+        no = 0;
+    } else {
+        var no = document.getElementById("tableParam").rows.length;
+        no--;
+    }
+    
     // add component parameter api
     $('body').on('click', '.addParam', function () {
+        if(first_row = "No data to display."){
+            $("tr[id='no-data']").remove();
+        }
+        
         no++;
         html = '<tr>'
             + "<td class='number text-center'>"
