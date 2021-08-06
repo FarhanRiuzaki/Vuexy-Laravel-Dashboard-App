@@ -12,7 +12,7 @@ class PageTemplateController extends Controller
 {
     private $page_title         = "Page Template";
     private $route              = "pages";
-    private $permission         = "page";
+    private $permission         = "page-template";
     private $pageConfigs        = ['pageHeader' => false];
 
     function __construct()
@@ -112,7 +112,7 @@ class PageTemplateController extends Controller
     {
         $this->validate($request, [
             'code'          => 'required',
-            'url'          => 'required',
+            'url'           => 'required',
             'description'   => 'required'
         ]);
 

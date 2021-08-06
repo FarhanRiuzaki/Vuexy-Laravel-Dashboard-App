@@ -1,8 +1,8 @@
 {!! Form::open(array('route' => $route . '.store','method'=>'POST','id' => 'MyForm')) !!}
 
-{{ Form::inputText('Code: ', 'code', null, null, ['placeholder' => 'channel code', 'required']) }}
+{{ Form::inputText('Code: ', 'code', null, null, ['placeholder' => 'page code', 'required']) }}
 
-{{ Form::inputText('URL: ', 'url', null, null, ['placeholder' => 'channel name', 'required']) }}
+{{ Form::inputText('URL: ', 'url', null, null, ['placeholder' => 'page name', 'required']) }}
 
 {{ Form::inputTextarea('Description: ', 'description', null, null, ['placeholder' => 'page description', 'required', 'rows'=>'4','cols'=>'4']) }}
 
