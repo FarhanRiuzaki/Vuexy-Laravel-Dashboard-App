@@ -3,12 +3,13 @@
 namespace App\Models;
 
 use App\Traits\RecordSignature;
+use App\Traits\RecordSignatureUUID;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class TemplateDetail extends Model
 {
-    use HasFactory, RecordSignature;
+    use HasFactory, RecordSignatureUUID;
 
     protected $guarded = [];
 

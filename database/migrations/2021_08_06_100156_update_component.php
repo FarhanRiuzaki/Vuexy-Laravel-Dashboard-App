@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class ParamterApi extends Migration
+class UpdateComponent extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class ParamterApi extends Migration
      */
     public function up()
     {
-        Schema::table('component_parameter_apis',  function(Blueprint $table){
-            $table->integer('type')->after('created_at')->nullable();
+        Schema::table('components',  function(Blueprint $table){
+            $table->integer('created_by')->after('created_at')->nullable();
             $table->integer('updated_by')->after('updated_at')->nullable();
-            
         });
     }
 

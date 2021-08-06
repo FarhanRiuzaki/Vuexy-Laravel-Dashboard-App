@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Traits\UUID;
+use App\Traits\RecordSignatureUUID;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -12,7 +12,7 @@ use OwenIt\Auditing\Contracts\Auditable;
 class User extends Authenticatable implements Auditable 
 {
     use \OwenIt\Auditing\Auditable;
-    use HasRoles, HasFactory, Notifiable, UUID;
+    use HasRoles, HasFactory, Notifiable, RecordSignatureUUID;
 
     
     protected $primaryKey = 'id';
