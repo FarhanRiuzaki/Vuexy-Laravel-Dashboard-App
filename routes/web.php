@@ -21,7 +21,9 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Master\ChannelController;
+use App\Http\Controllers\Master\ComponentTemplateController;
 use App\Http\Controllers\Master\MerchantController;
+use App\Http\Controllers\Master\PageTemplateController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -49,6 +51,7 @@ Route::get('permissions/datatable',[PermissionController::class,'datatable'])->n
 Route::get('users/update-status/{id}',[UserController::class, 'updateStatus'])->name('users.updateStatus');
 Route::get('channels/datatable', [ChannelController::class, 'datatable'])->name('channels.datatable'); //datatable 'channel'
 Route::get('merchants/datatable', [MerchantController::class, 'datatable'])->name('merchants.datatable'); //datatable 'merchant'
+Route::get('pages/datatable', [PageTemplateController::class, 'datatable'])->name('pages.datatable'); //datatable 'page template'
 
 Route::resource('roles',RoleController::class);
 Route::resource('permissions',PermissionController::class);
@@ -57,6 +60,9 @@ Route::resource('users',UserController::class);
 // MASTER DASHBOARD ROUTE
 Route::resource('channels', ChannelController::class);
 Route::resource('merchants', MerchantController::class);
+Route::resource('user', UserController::class);
+Route::resource('pages', PageTemplateController::class);
+Route::resource('components', ComponentTemplateController::class);
 
 // Auth::routes(['verify' => true]);
 
