@@ -34,7 +34,7 @@
     {
       "url": "components",
       "name": "Component",
-      "icon": "file-text",
+      "icon": "command",
       "slug": "components",
       "permission": "component-template.index"
     },

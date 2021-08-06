@@ -52,6 +52,7 @@ Route::get('users/update-status/{id}',[UserController::class, 'updateStatus'])->
 Route::get('channels/datatable', [ChannelController::class, 'datatable'])->name('channels.datatable'); //datatable 'channel'
 Route::get('merchants/datatable', [MerchantController::class, 'datatable'])->name('merchants.datatable'); //datatable 'merchant'
 Route::get('pages/datatable', [PageTemplateController::class, 'datatable'])->name('pages.datatable'); //datatable 'page template'
+Route::get('components/datatable', [ComponentTemplateController::class, 'datatable'])->name('components.datatable'); //datatable 'component template'
 
 Route::resource('roles',RoleController::class);
 Route::resource('permissions',PermissionController::class);
