@@ -101,6 +101,7 @@
             var dt_basic = dt_basic_table.DataTable({
                 processing: true,
                 serverSide: true,
+                responsive: true,
                 ajax: {
                     url: url,
                     type: 'GET',
