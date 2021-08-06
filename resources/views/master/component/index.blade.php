@@ -8,13 +8,11 @@
   <link rel="stylesheet" href="{{ asset(mix('vendors/css/tables/datatable/dataTables.bootstrap4.min.css')) }}">
   <link rel="stylesheet" href="{{ asset(mix('vendors/css/tables/datatable/responsive.bootstrap4.min.css')) }}">
   <link rel="stylesheet" href="{{ asset(mix('vendors/css/tables/datatable/buttons.bootstrap4.min.css')) }}">
-  <link rel="stylesheet" href="{{ asset(mix('vendors/css/tables/datatable/rowGroup.bootstrap4.min.css')) }}">
-  <link rel="stylesheet" href="{{ asset(mix('vendors/css/pickers/flatpickr/flatpickr.min.css')) }}">
 @endsection
 
 @section('content')
 <style>
-   
+
 </style>
 <div class="row">
     @php
@@ -24,53 +22,34 @@
         @php
             $class_offset = '';
         @endphp
-        <div class="col-xs-4 col-sm-4 col-md-4">
-            <div class="card">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="card card-custom">
                 {{-- Header --}}
                 <div class="card-header border-bottom p-1">
                     <div class="head-label">
-                    @if(isset($merchant_edit))
-                        <h4 class="mb-0">Edit Merchant</h4>
-                    @else
-                        <h4 class="mb-0">Add Merchant</h4>
-                    @endif
+                        <h3 class="mb-0">List Component</h3>
                     </div>
+                    <a href="{{ route($route. '.create') }}" class="btn font-weight-bold btn-primary">Add New Component</a>
                 </div>
                 {{-- Body --}}
-                <div class="card-body pt-2">
-                    @if(isset($merchant_edit))
-                        @include('master.merchant.edit')
-                    @else
-                        @include('master.merchant.create')
-                    @endif
+                <div class="card-body table-responsive" >
+                    <table class="table table-bordered yajra-datatable">
+                        <thead>
+                            <tr class="text-center">
+                                <th>No</th>
+                                <th>API Name</th>
+                                <th>Type</th>
+                                <th>Header</th>
+                                <th>Created At</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                    </table>
                 </div>
             </div>
         </div>
     {{-- @endcan --}}
-    <div class="col-xs-8 col-sm-8 col-md-8">
-        <div class="card card-custom">
-            {{-- Header --}}
-            <div class="card-header border-bottom p-1">
-                <div class="head-label">
-                    <h4 class="mb-0">List Merchant</h4>
-                </div>
-            </div>
-            {{-- Body --}}
-            <div class="card-body table-responsive" >
-                <table class="table table-bordered yajra-datatable">
-                    <thead>
-                        <tr class="text-center">
-                            <th width='20px'>No</th>
-                            <th>Code</th>
-                            <th>Name</th>
-                            <th>Created At</th>
-                            <th width='100px'>Action</th>
-                        </tr>
-                    </thead>
-                </table>
-            </div>
-        </div>
-    </div>
+
 </div>
 @endsection
 
@@ -90,25 +69,14 @@
         var dt_basic_table = $('.yajra-datatable');
         var type    = '';   // def type
         var url     = "{{ route($route . '.datatable') }}";
-        @if(isset($merchant_edit))
-            var type    = 'edit';   // type=edit, eksekusi function edit
-        @else
-            var type    = 'create';
-        @endif
         // DataTable with buttons
         // --------------------------------------------------------------------
         if (dt_basic_table.length) {
             var dt_basic = dt_basic_table.DataTable({
+                responsive: true,
                 processing: true,
                 serverSide: true,
-                responsive: true,
-                ajax: {
-                    url: url,
-                    type: 'GET',
-                    data: {
-                        type: type
-                    }
-                },
+                ajax: { url: url },
                 columns: [
                     {
                         data: 'DT_RowIndex',
@@ -116,8 +84,9 @@
                         orderable: false,
                         searchable: false
                     },
-                    {data: 'code', name: 'code'},
-                    {data: 'name', name: 'name'},
+                    {data: 'api_name', name: 'api_name'},
+                    {data: 'type', name: 'type'},
+                    {data: 'header', name: 'header'},
                     {data: 'created_at', name: 'created_at'},
                     {
                         data: 'action',
@@ -127,10 +96,10 @@
                     },
                 ],
                 "columnDefs": [
-                    { className: "text-center", "targets": [ 0, 4] }
+                    { className: "text-center", "targets": [ 0, 5] }
                 ],
-                "order": [[ 3, "desc" ]],
-                scrollY: "500px",
+                "order": [[ 4, "desc" ]],
+                scrollY: "400px",
                 scrollCollapse: true,
                 paging: false,
                 dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',

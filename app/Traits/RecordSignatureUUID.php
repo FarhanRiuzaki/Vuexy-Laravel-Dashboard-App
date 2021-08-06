@@ -18,12 +18,13 @@ trait RecordSignatureUUID
         });
 
         static::creating(function ($model) {
-            if(Auth::User() != null){
-                $model->created_by = Auth::User()->id;
-            }
             $model->incrementing = false;
             $model->keyType = 'string';
             $model->{$model->getKeyName()} = Str::uuid()->toString();
+            if(Auth::User() != null){
+                $model->created_by = Auth::User()->id;
+            }
+            // dd($model);
         });
     }
 }
