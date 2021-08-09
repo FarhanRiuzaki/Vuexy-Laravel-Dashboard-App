@@ -21,7 +21,7 @@
                 {{-- Header --}}
                 <div class="card-header border-bottom p-1 d-flex">
                     <div class="head-label">
-                        <h4 class="mb-0">Edit Component</h4>
+                        <h4 class="mb-0">Show Component</h4>
                     </div>
                     {{ BackButton($route) }}
                 </div>
@@ -62,7 +62,7 @@
                 <br>
                 <div class="card-header border-bottom p-1">
                     <div class="head-label">
-                        <h4 class="mb-0">Edit Component Parameter API</h4>
+                        <h4 class="mb-0">Show Component Parameter API</h4>
                     </div>
                 </div>
                 {{-- Body --}}
