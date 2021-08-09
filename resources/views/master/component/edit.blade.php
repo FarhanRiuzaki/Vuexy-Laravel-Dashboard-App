@@ -47,7 +47,6 @@
                         <div class="col-xs-4 col-sm-4 col-md-6 col-lg-4">
                             {{ Form::inputText('Header: ', 'header', null, null, ['placeholder' => 'Header', 'required'])}}
                         </div>
-
                         <div class="col-xs-4 col-sm-4 col-md-6 col-lg-4">
                             {{ Form::inputSelect('Column Size: ', 'column_size', ['3' => 'Col-3', '4' => 'Col-4', '6' => 'Col-6', '8' => 'Col-8', '12' => 'Col-12'], null, ['required'])}}
                         </div>
