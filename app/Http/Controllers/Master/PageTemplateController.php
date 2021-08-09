@@ -79,7 +79,15 @@ class PageTemplateController extends Controller
      */
     public function show($id)
     {
-        //
+        $page_show = Page::find($id);
+
+        return view('master.page.show', [
+            'pageConfigs'   => $this->pageConfigs,
+            'page_title'    => $this->page_title,
+            'permission'    => $this->permission,
+            'route'         => $this->route,
+            'page_show'     => $page_show
+        ]);
     }
 
     /**
@@ -154,7 +162,9 @@ class PageTemplateController extends Controller
                 return createdAt($data->created_at);
             })
             ->addColumn('action', function ($data) {
-                $button = '';
+                $button = '<a href="' . route($this->route . '.show', $data->id) . '" class="btn btn-icon btn-warning btn-sm"  data-toggle="tooltip" title="Show">
+                    ' . SVGI('bi-eye') . '
+                    </a>';
                 if (auth()->user()->can($this->permission . '.edit')) {
                     $button .= ' <a href="' . route($this->route . '.edit', $data->id) . '" class="btn btn-icon btn-primary btn-sm"  data-toggle="tooltip" title="Edit">
                     ' . SVGI('bi-pencil-square') . '
