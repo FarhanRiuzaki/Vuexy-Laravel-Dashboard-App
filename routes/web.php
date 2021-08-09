@@ -74,6 +74,7 @@ Route::get('dashboard/{id}/{url}/{sequence}',[PageController::class,'index'] );
 Route::get('api/test/{api_name}',[ApiController::class, 'test']); //update status user
 Route::get('api/{api_name}',[ApiController::class, 'getFromApi']); //update status user
 
+Route::get('scrollspy', [DashboardController::class,'scrollspy'])->name('scrollspy');
 
 /* Route Dashboards */
 Route::group(['prefix' => 'dashboard'], function () {

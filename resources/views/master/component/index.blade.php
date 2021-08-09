@@ -39,9 +39,9 @@
                                 <th width="4%">No</th>
                                 <th width="26%">API Name</th>
                                 <th width="16%">Type</th>
-                                <th width="26%">Header</th>
+                                <th width="21%">Header</th>
                                 <th width="18%">Created At</th>
-                                <th width="10%">Action</th>
+                                <th width="15%">Action</th>
                             </tr>
                         </thead>
                     </table>

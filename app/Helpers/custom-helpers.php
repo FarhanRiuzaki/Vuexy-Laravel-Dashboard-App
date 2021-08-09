@@ -84,15 +84,24 @@ function CreateButton($route, $permission_type)
     echo $button;
 }
 
-function BackButton($route){
-    echo '<div class="dt-action-buttons text-right">
-        <div class="dt-buttons">
-            <a href="'. route($route.'.index')  .'" class="dt-button btn btn-primary btn-warning">
-                <i data-feather="chevrons-left"></i>
-                Back
-            </a>
-        </div>
-    </div>';
+function BackButton($route, $submit = false, $back = true){
+    $button = '<div class="dt-action-buttons text-right">
+            <div class="dt-buttons">';
+                if ($submit) {
+                    # code...
+                    $button .= '<button class="btn btn-primary data-submit mr-1">Submit</button>';
+                }
+                if ($back) {
+                    # code...
+                    $button .= '<a href="'. route($route.'.index')  .'" class="dt-button btn btn-primary btn-warning">
+                        <i data-feather="chevrons-left"></i>
+                        Back
+                    </a>';
+                }
+                
+                $button .=  '</div>
+        </div>';
+    echo $button;
 }
 
 //function SAVE Permission
