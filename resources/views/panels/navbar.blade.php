@@ -268,12 +268,12 @@
               <span class="user-name font-weight-bolder">{{ auth()->user()->name }}</span>
               <span class="user-status">{{auth()->user()->roles[0]->name}}</span>
             </div>
-              <div class="avatar-wrapper">
-                <div class="avatar  bg-light-secondary" >
-                  <span class="avatar-content-custom" >{{ get_avatar(Auth::user()->name) }}</span>
-                  <span class="avatar-status-online"></span>
-                </div>
+            <div class="avatar-wrapper">
+              <div class="avatar  bg-light-secondary" >
+                <span class="avatar-content-custom" >{{ get_avatar(Auth::user()->name) }}</span>
+                <span class="avatar-status-online"></span>
               </div>
+            </div>
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-user">
             <a class="dropdown-item" href="{{url('page/profile')}}">
