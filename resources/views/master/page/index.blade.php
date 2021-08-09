@@ -60,11 +60,11 @@
                 <table class="table table-bordered yajra-datatable">
                     <thead>
                         <tr class="text-center">
-                            <th width='30px'>No</th>
-                            <th>Code</th>
-                            <th>URL</th>
-                            <th>Created At</th>
-                            <th width='100px'>Action</th>
+                            <th width='10%'>No</th>
+                            <th width='15%'>Code</th>
+                            <th width='30%'>URL</th>
+                            <th width='25%'>Created At</th>
+                            <th width='20%'>Action</th>
                         </tr>
                     </thead>
                 </table>

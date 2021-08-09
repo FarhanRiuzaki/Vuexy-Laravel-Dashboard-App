@@ -222,7 +222,8 @@ class ComponentTemplateController extends Controller
     {
         if ($request->ajax()) {
             $this->type = $request['type'];
-            $model = Component::query()->orderBy('created_at', 'DESC')->get();
+            // with untuk menggunakan method belongsTo yang sudah diatur di controller
+            $model = Component::with('page')->select('components.*')->orderBy('created_at', 'DESC')->get();
 
             return DataTables::of($model)
             ->addIndexColumn()

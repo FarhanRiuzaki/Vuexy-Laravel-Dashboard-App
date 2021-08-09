@@ -36,12 +36,13 @@
                     <table class="table table-bordered yajra-datatable">
                         <thead>
                             <tr class="text-center">
-                                <th width="4%">No</th>
-                                <th width="26%">API Name</th>
-                                <th width="16%">Type</th>
-                                <th width="21%">Header</th>
-                                <th width="18%">Created At</th>
-                                <th width="15%">Action</th>
+                                <th width='5%'>No</th>
+                                <th>Page</th>
+                                <th>API Name</th>
+                                <th>Type</th>
+                                <th>Header</th>
+                                <th width='22%'>Created At</th>
+                                <th width='18%'>Action</th>
                             </tr>
                         </thead>
                     </table>
@@ -84,10 +85,11 @@
                         orderable: false,
                         searchable: false
                     },
-                    {data: 'api_name', name: 'api_name'},
-                    {data: 'type', name: 'type'},
-                    {data: 'header', name: 'header'},
-                    {data: 'created_at', name: 'created_at'},
+                    {data: 'page.code', name: 'page.code'},
+                    {data: 'api_name', name: 'components.api_name'},
+                    {data: 'type', name: 'components.type'},
+                    {data: 'header', name: 'components.header'},
+                    {data: 'created_at', name: 'components.created_at'},
                     {
                         data: 'action',
                         name: 'action',
@@ -96,9 +98,9 @@
                     },
                 ],
                 "columnDefs": [
-                    { className: "text-center", "targets": [ 0, 5] }
+                    { className: "text-center", "targets": [ 0, 6] }
                 ],
-                "order": [[ 4, "desc" ]],
+                "order": [[ 5, "desc" ]],
                 scrollY: "400px",
                 scrollCollapse: true,
                 paging: false,
