@@ -1,6 +1,7 @@
 <link rel="stylesheet" href="{{ asset(mix('vendors/css/vendors.min.css')) }}" />
 <link rel="stylesheet" href="{{ asset(mix('vendors/css/ui/prism.min.css')) }}" />
 <link rel="stylesheet" href="{{ asset(mix('vendors/css/extensions/toastr.min.css')) }}">
+<link rel="stylesheet" href="{{ asset('css/documentation.css') }}">
   {{-- Vendor Styles --}}
 @stack('vendor-style')
 @yield('vendor-style')

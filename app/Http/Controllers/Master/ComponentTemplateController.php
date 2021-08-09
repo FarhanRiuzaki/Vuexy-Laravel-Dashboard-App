@@ -46,7 +46,7 @@ class ComponentTemplateController extends Controller
      */
     public function create()
     {
-        $page           = Page::pluck('code', 'id');
+        $page           = Page::select(DB::raw('CONCAT(code, " [", description, "]") as code'), 'id')->pluck('code', 'id');
 
         return view('master.component.create', [
             'pageConfigs'   => $this->pageConfigs,
@@ -111,7 +111,20 @@ class ComponentTemplateController extends Controller
      */
     public function show($id)
     {
-        //
+        $page           = Page::select(DB::raw('CONCAT(code, " [", description, "]") as code'), 'id')->pluck('code', 'id');
+        $component_edit = Component::find($id);
+        // $comp_param_api = ComponentParameterApi::where('component_id', $id)->get();
+        $comp_param_api = $component_edit->componentParameterApi()->where('component_id',$id)->get();
+
+        return view('master.component.show', [
+            'pageConfigs'       => $this->pageConfigs,
+            'page_title'        => $this->page_title,
+            'permission'        => $this->permission,
+            'route'             => $this->route,
+            'page'              => $page,
+            'component_edit'    => $component_edit,
+            'comp_param_api'    => $comp_param_api
+        ]);
     }
 
     /**
@@ -122,7 +135,7 @@ class ComponentTemplateController extends Controller
      */
     public function edit($id)
     {
-        $page           = Page::pluck('code', 'id');
+        $page           = Page::select(DB::raw('CONCAT(code, " [", description, "]") as code'), 'id')->pluck('code', 'id');
         $component_edit = Component::find($id);
         // $comp_param_api = ComponentParameterApi::where('component_id', $id)->get();
         $comp_param_api = $component_edit->componentParameterApi()->where('component_id',$id)->get();
@@ -217,7 +230,9 @@ class ComponentTemplateController extends Controller
                 return createdAt($data->created_at);
             })
             ->addColumn('action', function ($data) {
-                $button = '';
+                $button = ' <a href="' . route($this->route . '.show', $data->id) . '" class="btn btn-icon btn-warning btn-sm"  data-toggle="tooltip" title="Show">
+                    ' . SVGI('bi-eye') . '
+                    </a>';
                 if (auth()->user()->can($this->permission . '.edit')) {
                     $button .= ' <a href="' . route($this->route . '.edit', $data->id) . '" class="btn btn-icon btn-primary btn-sm"  data-toggle="tooltip" title="Edit">
                     ' . SVGI('bi-pencil-square') . '

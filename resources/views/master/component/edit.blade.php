@@ -3,15 +3,6 @@
 
 @section('title', $page_title) 
 
-@section('vendor-style')
-  {{-- vendor css files --}}
-  <link rel="stylesheet" href="{{ asset(mix('vendors/css/tables/datatable/dataTables.bootstrap4.min.css')) }}">
-  <link rel="stylesheet" href="{{ asset(mix('vendors/css/tables/datatable/responsive.bootstrap4.min.css')) }}">
-  <link rel="stylesheet" href="{{ asset(mix('vendors/css/tables/datatable/buttons.bootstrap4.min.css')) }}">
-  <link rel="stylesheet" href="{{ asset(mix('vendors/css/tables/datatable/rowGroup.bootstrap4.min.css')) }}">
-  <link rel="stylesheet" href="{{ asset(mix('vendors/css/pickers/flatpickr/flatpickr.min.css')) }}">
-@endsection
-
 @section('content')
 <style>
 
@@ -32,10 +23,7 @@
                     <div class="head-label">
                         <h4 class="mb-0">Edit Component</h4>
                     </div>
-                    <div>
-                        <button class="btn btn-primary data-submit mr-1">Update All</button>
-                        <a href="{{ route($route. '.index') }}" class="btn font-weight-bold btn-danger mr-1">Cancel</a>
-                    </div>
+                    {{ BackButton($route, true) }}
                 </div>
                 {{-- Body --}}
                 <div class="card-body pt-2">
@@ -47,7 +35,7 @@
                             {{ Form::inputText('API name: ', 'api_name', null, null, ['placeholder' => 'API name', 'required']) }}
                         </div>
                         <div class="col-xs-4 col-sm-4 col-md-6 col-lg-4">
-                            {{ Form::inputText('API type: ', 'api_type', null, null, ['placeholder' => 'API Type', 'required']) }}
+                            {{ Form::inputSelect('API type: ', 'api_type', ['json' => 'json', 'php'=>'php'], null, ['required']) }}
                         </div>
 
                         <div class="col-xs-4 col-sm-4 col-md-6 col-lg-4">
@@ -61,7 +49,7 @@
                         </div>
 
                         <div class="col-xs-4 col-sm-4 col-md-6 col-lg-4">
-                            {{ Form::inputText('Column Size: ', 'column_size', null, null, ['placeholder' => 'Column size', 'required'])}}
+                            {{ Form::inputSelect('Column Size: ', 'column_size', ['3' => 'Col-3', '4' => 'Col-4', '6' => 'Col-6', '8' => 'Col-8', '12' => 'Col-12'], null, ['required'])}}
                         </div>
                         <div class="col-xs-4 col-sm-4 col-md-6 col-lg-4">
                             {{ Form::inputText('Action: ', 'action', null, null, ['placeholder' => 'Action', 'required'])}}
@@ -82,32 +70,37 @@
                     <div class="table-responsive">
                         <table class="table table-bordered tableParam" id='tableParam'>
                             <thead>
-                                <tr class="text-center">
-                                    <th width='5px' class="font-medium-1">No</th>
-                                    <th width='45%' class="font-medium-1">Name</th>
-                                    <th width='45%' class="font-medium-1">Value</th>
-                                    <th width='5px'><button type="button" class="btn btn-success btn-icon addParam">
-                                            <i data-feather="plus"></i>
-                                    </button></th>
+                                <tr class="text-center vertical">
+                                    <th width='4%' class="font-weight-bold">No</th>
+                                    <th width='45%' class="font-weight-bold">Name</th>
+                                    <th width='45%' class="font-weight-bold">Value</th>
+                                    <th width='5%' class="font-weight-bold">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                            @if ($comp_param_api->count() == 0)
-                                <tr id='no-data'>
-                                    <td colspan="4" class="text-center">No data to display.</td>
+                                <tr class="tr-input text-center">
+                                    <td colspan="3"><b>Parameter API</b></td>
+                                    <td width='5px'>
+                                        <button type="button" class="btn btn-success btn-icon btn-sm addParam">
+                                            <x-bi-plus-circle/>
+                                        </button>
+                                    </td>
                                 </tr>
-                            @endif
-
-                            @foreach ($comp_param_api as $key => $param)
+                                @forelse ($comp_param_api as $key => $param)
                                 <tr>
-                                    <td class='text-center'>{{ ++$key }}</td>
+                                    <td class='text-center number'>{{ ++$key }}</td>
                                     <td>{{ Form::inputText(null, 'component_parameter_api['.$key.'][name]', $param->name, null, ['placeholder' => 'name', 'required'])}}</td>
                                     <td>{{ Form::inputText(null, 'component_parameter_api['.$key.'][value]', $param->value, null, ['placeholder' => 'value', 'required'])}}</td>
                                     <td class='text-center'>
-                                        <button type="button" class="btn btn-danger btn-icon dellParam">
-                                            <i data-feather="trash-2"></i></button></td>
+                                        <button type="button" class="btn btn-danger btn-sm btn-icon dellParam">
+                                            <i class="fa fa-times-circle" style="font-size:16px"></i></button></td>
                                 </tr>
-                            @endforeach
+                                @empty
+                                <tr id='no-data'>
+                                    <td colspan="4" class="text-center">No data to display.</td>
+                                </tr>
+                                @endforelse
+                               
                             </tbody>
                         </table>
                     </div>
@@ -120,32 +113,23 @@
 </div>
 @endsection
 
-@push('vendor-script')
-{{-- vendor files --}}
-  <script src="{{ asset(mix('vendors/js/tables/datatable/jquery.dataTables.min.js')) }}"></script>
-  <script src="{{ asset(mix('vendors/js/tables/datatable/datatables.bootstrap4.min.js')) }}"></script>
-  <script src="{{ asset(mix('vendors/js/tables/datatable/dataTables.responsive.min.js')) }}"></script>
-  <script src="{{ asset(mix('vendors/js/tables/datatable/responsive.bootstrap4.js')) }}"></script>
-  <script src="{{ asset(mix('vendors/js/tables/datatable/jszip.min.js')) }}"></script>
-@endpush
-
 @push('page-script')
 <script>
     var first_row = $('table tr:last td').text();
 
-    if(first_row = "No data to display."){
+    if(first_row == "No data to display."){
         no = 0;
     } else {
         var no = document.getElementById("tableParam").rows.length;
+        no--;
         no--;
     }
     
     // add component parameter api
     $('body').on('click', '.addParam', function () {
-        if(first_row = "No data to display."){
+        if(first_row == "No data to display."){
             $("tr[id='no-data']").remove();
         }
-        
         no++;
         html = '<tr>'
             + "<td class='number text-center'>"
@@ -158,7 +142,7 @@
                 + "<input type='text' data-name='value' name='component_parameter_api["+no+"][value]' class='form-control'>"
             +"</td>"
             + "<td class='text-center'>"
-                + '<button type="button" class="btn btn-danger btn-icon dellParam"><i data-feather="plus"></i></button>'
+                + '<button type="button" class="btn btn-danger btn-icon btn-sm dellParam"><i class="fa fa-times-circle-o" style="font-size:16px"></i></button>'
             + "</td>";
         $('.tableParam tbody').append(html);
     });

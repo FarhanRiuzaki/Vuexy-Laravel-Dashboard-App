@@ -33,4 +33,11 @@ class DashboardController extends Controller
 
     return view('/content/dashboard/search', ['pageConfigs' => $pageConfigs]);
   }
+
+  public function scrollspy()
+  {
+    $pageConfigs = ['pageHeader' => false];
+
+    return view('scrollspy.index', ['pageConfigs' => $pageConfigs]);
+  }
 }
