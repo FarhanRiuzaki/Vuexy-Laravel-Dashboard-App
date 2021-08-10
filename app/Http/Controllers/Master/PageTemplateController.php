@@ -79,8 +79,8 @@ class PageTemplateController extends Controller
      */
     public function show($id)
     {
-        $page_show = Page::find($id);
-
+        $page_show = Page::with('component')->find($id);
+        // dd($page_show);
         return view('master.page.show', [
             'pageConfigs'   => $this->pageConfigs,
             'page_title'    => $this->page_title,

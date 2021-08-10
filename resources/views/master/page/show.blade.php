@@ -37,7 +37,29 @@
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-12">
                             {{ Form::inputTextarea('Description: ', 'description', null, null, ['placeholder' => 'page description', 'disabled', 'rows'=>'4','cols'=>'4', 'resize'=>'none']) }}
                         </div>
-
+                        <div class="col-md-12">
+                            <h4>Component List</h4>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr class="text-center">
+                                        <td width='10px'>No</td>
+                                        <td>API Name</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @forelse ($page_show->component as $item)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $item->api_name }}</td>
+                                        </tr>
+                                    @empty
+                                        <tr class="text-center">
+                                            <td colspan="2">No Data</td>
+                                        </tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
                 {!! Form::close() !!}

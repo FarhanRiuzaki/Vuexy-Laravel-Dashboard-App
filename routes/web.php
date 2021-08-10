@@ -77,9 +77,9 @@ Route::get('api/{api_name}',[ApiController::class, 'getFromApi']); //update stat
 Route::get('scrollspy', [DashboardController::class,'scrollspy'])->name('scrollspy');
 
 /* Route Dashboards */
-Route::group(['prefix' => 'dashboard'], function () {
-  Route::get('analytics', [DashboardController::class,'dashboardAnalytics'])->name('dashboard-analytics');
-  Route::get('ecommerce', [DashboardController::class,'dashboardEcommerce'])->name('dashboard-ecommerce');
-  Route::get('search', [DashboardController::class,'search'])->name('search');
-});
+// Route::group(['prefix' => 'dashboard'], function () {
+//   Route::get('analytics', [DashboardController::class,'dashboardAnalytics'])->name('dashboard-analytics');
+//   Route::get('ecommerce', [DashboardController::class,'dashboardEcommerce'])->name('dashboard-ecommerce');
+//   Route::get('search', [DashboardController::class,'search'])->name('search');
+// });
 /* Route Dashboards */
