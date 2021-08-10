@@ -3,15 +3,16 @@
 namespace App\Models;
 
 use App\Traits\RecordSignatureUUID;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 use OwenIt\Auditing\Contracts\Auditable;
 
-class User extends Authenticatable implements Auditable 
+class User extends Authenticatable implements MustVerifyEmail 
 {
-    use \OwenIt\Auditing\Auditable;
+    // use \OwenIt\Auditing\Auditable;  
     use HasRoles, HasFactory, Notifiable, RecordSignatureUUID;
 
     

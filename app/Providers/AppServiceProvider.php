@@ -4,7 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Form;
-
+// use Illuminate\Auth\Notifications\VerifyEmail;
+// use Illuminate\Notifications\Messages\MailMessage;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -44,5 +45,13 @@ class AppServiceProvider extends ServiceProvider
         Form::component('inputNumber',      'component.form.number',     ['label', 'name', 'value' => null, 'class',  'attributes' => []]);
         Form::component('inputSelect',      'component.form.select',     ['label', 'name', 'value' => [], 'class',  'attributes' => [], 'default' => null]);
         // dd(auth()->user());
+
+        // VerifyEmail::toMailUsing(function ($notifiable, $url) {
+        //     return (new MailMessage)
+        //         ->subject('Verify Email Address')
+        //         ->line('Click the button below to verify your email address.')
+        //         // ->view('auth.verify')
+        //         ->action('Verify Email Address', $url);
+        // });
     }
 }
