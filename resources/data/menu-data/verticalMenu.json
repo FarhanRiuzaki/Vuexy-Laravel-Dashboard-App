@@ -1,12 +1,6 @@
 {
   "menu": [
     {
-      "url": "scrollspy",
-      "name": "Scrollspy",
-      "icon": "grid",
-      "slug": "scrollspy"
-    },
-    {
       "navheader": "Master Dashboard",
       "slug": "",
       "permission":  ["channel.index", "merchant.index"]
