@@ -17,7 +17,7 @@
         @endphp
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="card">
-                {!! Form::model($component_edit, ['method' => 'PATCH','route' => [$route . '.update', $component_edit->id], 'id' => 'MyForm']) !!}
+                {!! Form::model($component_show, ['method' => 'PATCH','route' => [$route . '.update', $component_show->id], 'id' => 'MyForm']) !!}
                 {{-- Header --}}
                 <div class="card-header border-bottom p-1 d-flex">
                     <div class="head-label">
@@ -58,16 +58,11 @@
                             {{ Form::inputNumber('Sequence: ', 'sequence', null, null, ['placeholder' => 'Sequence', 'disabled'])}}
                         </div>
                     </div>
-                </div>
-                <br>
-                <div class="card-header border-bottom p-1">
-                    <div class="head-label">
-                        <h4 class="mb-0">Show Component Parameter API</h4>
-                    </div>
-                </div>
-                {{-- Body --}}
-                <div class="card-body pt-2">
-                    <div class="table-responsive">
+                    <br>
+                    {{-- Param API --}}
+                    <h4 class="mb-0 pt-2">Component Parameter API List</h4>
+                    {{-- Body --}}
+                    <div class="table-responsive pt-2">
                         <table class="table table-bordered tableParam" id='tableParam'>
                             <thead>
                                 <tr class="text-center">
@@ -77,7 +72,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            @forelse ($comp_param_api as $key => $param)
+                            @forelse ($component_show->componentParameterApi as $key => $param)
                                 <tr>
                                     <td class='text-center'>{{ ++$key }}</td>
                                     <td>{{ $param->name }}</td>
@@ -91,8 +86,36 @@
                             </tbody>
                         </table>
                     </div>
+                    {{-- End of Param API --}}
+                    {{-- Component has Page --}}
+                    <h4 class="mb-0 pt-2">Component Page List</h4>
+                    {{-- Body --}}
+                    <div class="table-responsive pt-2">
+                        <table class="table table-bordered tableParam" id='tableParam'>
+                            <thead>
+                                <tr class="text-center">
+                                    <th width='2%' class="font-weight-bold">No</th>
+                                    <th width='49%' class="font-weight-bold">Name</th>
+                                    <th width='49%' class="font-weight-bold">sequence</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            @forelse ($component_show->componentHasPage as $key => $param_page)
+                                <tr>
+                                    <td class='text-center'>{{ ++$key }}</td>
+                                    <td>{{ $param_page->page->code . ' [' . $param_page->page->description . ']' }}</td>
+                                    <td>{{ $param_page->sequence }}</td>
+                                </tr>
+                            @empty
+                                <tr id='no-data'>
+                                    <td colspan="4" class="text-center">No data to display.</td>
+                                </tr>
+                            @endforelse
+                            </tbody>
+                        </table>
+                    </div>
+                    {!! Form::close() !!}
                 </div>
-                {!! Form::close() !!}
             </div>
         </div>
     {{-- @endcan --}}

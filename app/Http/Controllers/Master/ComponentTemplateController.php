@@ -112,9 +112,9 @@ class ComponentTemplateController extends Controller
     public function show($id)
     {
         $page           = Page::select(DB::raw('CONCAT(code, " [", description, "]") as code'), 'id')->pluck('code', 'id');
-        $component_edit = Component::find($id);
+        $component_show = Component::with('componentHasPage','componentParameterApi')->find($id);
         // $comp_param_api = ComponentParameterApi::where('component_id', $id)->get();
-        $comp_param_api = $component_edit->componentParameterApi()->where('component_id',$id)->get();
+        // $comp_param_api = $component_edit->componentParameterApi()->where('component_id',$id)->get();
 
         return view('master.component.show', [
             'pageConfigs'       => $this->pageConfigs,
@@ -122,8 +122,7 @@ class ComponentTemplateController extends Controller
             'permission'        => $this->permission,
             'route'             => $this->route,
             'page'              => $page,
-            'component_edit'    => $component_edit,
-            'comp_param_api'    => $comp_param_api
+            'component_show'    => $component_show,
         ]);
     }
 
@@ -136,10 +135,11 @@ class ComponentTemplateController extends Controller
     public function edit($id)
     {
         $page           = Page::select(DB::raw('CONCAT(code, " [", description, "]") as code'), 'id')->pluck('code', 'id');
-        $component_edit = Component::find($id);
+        $component_edit = Component::with('componentHasPage','componentParameterApi')->find($id);
         // $comp_param_api = ComponentParameterApi::where('component_id', $id)->get();
-        $comp_param_api = $component_edit->componentParameterApi()->where('component_id',$id)->get();
-
+        // $comp_param_api = $component_edit->componentParameterApi()->where('component_id',$id)->get();
+        // $comp_has_page  = $component_edit->componentHasPage()->where('component_id', $id)->get();
+        // dd($component_edit);
         return view('master.component.edit', [
             'pageConfigs'       => $this->pageConfigs,
             'page_title'        => $this->page_title,
@@ -147,7 +147,8 @@ class ComponentTemplateController extends Controller
             'route'             => $this->route,
             'page'              => $page,
             'component_edit'    => $component_edit,
-            'comp_param_api'    => $comp_param_api
+            // 'comp_param_api'    => $comp_param_api,
+            // 'comp_has_page'     => $comp_has_page
         ]);
     }
 
@@ -172,11 +173,12 @@ class ComponentTemplateController extends Controller
             'sequence'      => 'required'
         ]);
         
-        // get semua data $request
-        $requestData = $request->All();
-        // assign 'component..' ke param_api
-        $param_api   = $requestData['component_parameter_api'];
-        // hapus value requestData[component...]
+        $requestData    = $request->All();
+
+        $compo_page     = $requestData['component_has_page'];
+        $param_api      = $requestData['component_parameter_api'];
+        
+        unset($requestData['component_has_page']);
         unset($requestData['component_parameter_api']);
         
         DB::beginTransaction();
@@ -186,8 +188,10 @@ class ComponentTemplateController extends Controller
             $updateData->update($requestData);
             // delete param_api
             $updateData->componentParameterApi()->delete();
+            $updateData->componentHasPage()->delete();
             // store new param_api ke child (componentParameterApi)
             $updateData->componentParameterApi()->createMany($param_api);
+            $updateData->componentHasPage()->createMany($compo_page);
 
             DB::commit();
         } catch (\Throwable $th) {

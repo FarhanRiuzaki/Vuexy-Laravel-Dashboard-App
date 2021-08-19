@@ -57,17 +57,12 @@
                             {{ Form::inputNumber('Sequence: ', 'sequence', null, null, ['placeholder' => 'Sequence', 'required'])}}
                         </div>
                     </div>
-                </div>
-                <br>
-                <div class="card-header border-bottom p-1">
-                    <div class="head-label">
-                        <h4 class="mb-0">Edit Component Parameter API</h4>
-                    </div>
-                </div>
-                {{-- Body --}}
-                <div class="card-body pt-2">
-                    <div class="table-responsive">
-                        <table class="table table-bordered tableParam" id='tableParam'>
+                    <br>
+                    {{-- Param API --}}
+                    <h4 class="mb-0 pt-2">Edit Component Parameter API</h4>
+                    {{-- Body --}}
+                    <div class="table-responsive pt-2">
+                        <table class="table table-bordered" id="tableParam">
                             <thead>
                                 <tr class="text-center vertical">
                                     <th width='4%' class="font-weight-bold">No</th>
@@ -85,7 +80,7 @@
                                         </button>
                                     </td>
                                 </tr>
-                                @forelse ($comp_param_api as $key => $param)
+                                @forelse ($component_edit->componentParameterApi as $key => $param)
                                 <tr>
                                     <td class='text-center number'>{{ ++$key }}</td>
                                     <td>{{ Form::inputText(null, 'component_parameter_api['.$key.'][name]', $param->name, null, ['placeholder' => 'name', 'required'])}}</td>
@@ -99,10 +94,50 @@
                                     <td colspan="4" class="text-center">No data to display.</td>
                                 </tr>
                                 @endforelse
-                               
                             </tbody>
                         </table>
                     </div>
+                    {{-- End of Param API --}}
+                    {{-- Component has Page --}}
+                    <h4 class="mb-0 pt-2">Edit Component Page</h4>
+                    {{-- Body --}}
+                    <div class="table-responsive pt-2">
+                        <table class="table table-bordered" id="tablePage">
+                            <thead>
+                                <tr class="text-center vertical">
+                                    <th width='4%' class="font-weight-bold">No</th>
+                                    <th width='45%' class="font-weight-bold">Page</th>
+                                    <th width='45%' class="font-weight-bold">Sequence</th>
+                                    <th width='5%' class="font-weight-bold">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="tr-input text-center">
+                                    <td colspan="3"><b>Parameter API</b></td>
+                                    <td width='5px'>
+                                        <button type="button" class="btn btn-success btn-icon btn-sm addPage">
+                                            <x-bi-plus-circle/>
+                                        </button>
+                                    </td>
+                                </tr>
+                                @forelse ($component_edit->componentHasPage as $keys => $param_page)
+                                <tr>
+                                    <td class='text-center number'>{{ ++$keys }}</td>
+                                    <td>{{ Form::inputSelect(null, 'component_has_page['.$key.'][page_id]', $page, null, ['required'], $param_page->page_id)}}</td>
+                                    <td>{{ Form::inputText(null, 'component_has_page['.$key.'][sequence]', $param_page->sequence, null, ['placeholder' => 'sequence', 'required'])}}</td>
+                                    <td class='text-center'>
+                                        <button type="button" class="btn btn-danger btn-sm btn-icon dellPage">
+                                            <i class="fa fa-times-circle" style="font-size:16px"></i></button></td>
+                                </tr>
+                                @empty
+                                <tr id='no-data'>
+                                    <td colspan="4" class="text-center">No data to display.</td>
+                                </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
+                    {{-- End of Param API --}}
                 </div>
                 {!! Form::close() !!}
             </div>
@@ -114,21 +149,9 @@
 
 @push('page-script')
 <script>
-    var first_row = $('table tr:last td').text();
-
-    if(first_row == "No data to display."){
-        no = 0;
-    } else {
-        var no = document.getElementById("tableParam").rows.length;
-        no--;
-        no--;
-    }
-    
     // add component parameter api
+    no  = {{$key}};
     $('body').on('click', '.addParam', function () {
-        if(first_row == "No data to display."){
-            $("tr[id='no-data']").remove();
-        }
         no++;
         html = '<tr>'
             + "<td class='number text-center'>"
@@ -141,9 +164,11 @@
                 + "<input type='text' data-name='value' name='component_parameter_api["+no+"][value]' class='form-control'>"
             +"</td>"
             + "<td class='text-center'>"
-                + '<button type="button" class="btn btn-danger btn-icon btn-sm dellParam"><i class="fa fa-times-circle-o" style="font-size:16px"></i></button>'
-            + "</td>";
-        $('.tableParam tbody').append(html);
+                + '<button type="button" class="btn btn-danger btn-icon btn-sm dellParam">'+ '<i class="fa fa-times-circle" style="font-size:16px"></i>' +'</button>'
+            + "</td>"
+            + "</tr>";
+        // console.log(html);
+        $('#tableParam tbody').append(html);
     });
 
     // delete component parameter api
@@ -151,7 +176,7 @@
         var tr = $(this).closest("tr");
             tr.remove();
 
-            $.each($(".tableParam tbody tr:not(.tr-input)"),function(e,item){
+            $.each($("#tableParam tbody tr:not(.tr-input)"),function(e,item){
                 //ganti nomor per TR
                 var no = e*1 +1;
                 $(this).find(".number").html(no);
@@ -163,6 +188,61 @@
                 })
             })
             no = no - 1;
+    });
+
+    var option = "";
+    var arrPage = JSON.parse(`<?php echo $page; ?>`);
+    $.each(arrPage, function( index, value ) {
+        // console.log( index + ": " + value );
+        option+= '<option value=' + index + '>' + value + '</option>'
+    });
+
+    // add component page
+    nop  = {{$keys}};
+    $('body').on('click', '.addPage', function () {
+        nop++;
+        html = '<tr>'
+            + "<td class='numberPage text-center'>"
+                + nop
+            +"</td>"
+            + "<td>"
+                + "<select data-name='page_id' name='component_has_page["+nop+"][page_id]' class='form-control'>"
+                    + option
+                + "</select>"
+            +"</td>"
+            + "<td>"
+                + "<input type='text' data-name='sequence' name='component_has_page["+nop+"][sequence]' class='form-control' value='" + nop + "'>"
+            +"</td>"
+            + "<td class='text-center'>"
+                + '<button type="button" class="btn btn-danger btn-icon btn-sm dellPage">'+ '<i class="fa fa-times-circle" style="font-size:16px"></i>' +'</button>'
+            + "</td>"
+            + "</tr>";
+        // console.log(html);
+        $('#tablePage tbody').append(html);
+    });
+
+    // delete component page
+    $('body').on('click', '.dellPage', function () {
+        var tr = $(this).closest("tr");
+            tr.remove();
+
+            $.each($("#tablePage tbody tr:not(.tr-input)"),function(p,item){
+                //ganti nomor per TR
+                var nop = p*1 +1;
+                $(this).find(".numberPage").html(nop);
+                $(this).find("input").val(nop);
+
+                //NEANGAN INPUTAN PER TR
+                $.each($(this).find("input"),function(s,f){
+                    var pageName = $(this).data("name");
+                    $(this).attr("name","component_has_page["+nop+"]["+pageName+"]");
+                })
+                $.each($(this).find("select"),function(s,f){
+                    var pageName = $(this).data("name");
+                    $(this).attr("name","component_has_page["+nop+"]["+pageName+"]");
+                })
+            })
+            nop = nop - 1;
     });
 </script>
 @endpush
