@@ -264,3 +264,42 @@ function createdAt($created)
 {
     return date('Y-m-d H:i:s', strtotime($created));
 }
+
+function componentHasPage($data, $seq, $url_page)
+{
+    $html = '<div
+                class="modal fade text-left"
+                id="componentHasPage-'.$seq.'"
+                tabindex="-1"
+                role="dialog"
+                aria-labelledby="myModalLabel20"
+                aria-hidden="true"
+            >
+                <div class="modal-dialog modal-dialog-centered modal-xs" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="componentHasPageLabel-'.$seq.'"></h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">';
+                                // proses generate url  
+                                foreach ($data as $key => $value) {
+                                    $templateDetail = $value->page->templateDetail;
+                                    foreach ($templateDetail as $k => $v) {
+                                        if($value->sequence == $v->sequence){
+                                            $url_page   =  'dashboard/'. $v->template->id . '/' .  $v->template->name  .'/'. encrypt($v->sequence);
+                                        }
+                                    }
+                                    $html .= '<div class="col-md-12"><a href="'. url($url_page).'"  class="btn mb-50 btn-block btn-primary">'.$value->page->description.'</a></div>';
+                                }
+                $html .= '</div>
+                        </div>
+                    </div>
+                </div>
+            </div>';
+    echo $html;
+//  dd($data);   
+}

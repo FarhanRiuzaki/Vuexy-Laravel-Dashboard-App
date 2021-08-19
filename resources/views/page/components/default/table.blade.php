@@ -36,21 +36,28 @@ if ($('body').attr('data-framework') === 'laravel') {
 // --------------------------------------------------------------------
 
 if (dt_ajax_table.length) {
-var dt_ajax = dt_ajax_table.dataTable({
-  processing: true,
-  ajax: assetPath + 'data/ajax.php',
-  pageLength: 5,
-  dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
-//   language: {
-//     paginate: {
-//       // remove previous & next text from pagination
-//       previous: '&nbsp;',
-//       next: '&nbsp;'
-//     }
-//   }
-});
+    var dt_ajax = dt_ajax_table.dataTable({
+    processing: true,
+    ajax: assetPath + 'data/ajax.php',
+    pageLength: 5,
+    dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+    //   language: {
+    //     paginate: {
+    //       // remove previous & next text from pagination
+    //       previous: '&nbsp;',
+    //       next: '&nbsp;'
+    //     }
+    //   }
+    });
+    $('.datatables-ajax-{{ $comp->sequence }}').on('click', 'tbody tr', function () {
+        var label = $(this).closest("tr").find("td:first-child").text();
+        $('#componentHasPageLabel-{{ $comp->sequence }}').text(label);
+        $('#componentHasPage-{{ $comp->sequence }}').modal('show');
+    } );
+
 }
 });
+
 </script>
 @endpush
 

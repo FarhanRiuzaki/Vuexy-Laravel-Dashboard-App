@@ -21,4 +21,9 @@ class Page extends Model
     {
         return $this->hasMany(Component::class, 'page_id');
     }
+
+    public function templateDetail()
+    {
+        return $this->hasMany(TemplateDetail::class, 'page_id');
+    }
 }

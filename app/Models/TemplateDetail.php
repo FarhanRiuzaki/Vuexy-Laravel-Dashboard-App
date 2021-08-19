@@ -17,4 +17,9 @@ class TemplateDetail extends Model
     {
         return $this->hasOne(Page::class, 'id', 'page_id');
     }
+
+    public function template()
+    {
+        return $this->hasOne(Template::class, 'id', 'template_id');
+    }
 }

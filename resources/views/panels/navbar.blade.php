@@ -74,6 +74,7 @@
           </ul> --}}
         </div>
         <ul class="nav navbar-nav align-items-center ml-auto">
+          
           {{-- <li class="nav-item dropdown dropdown-language">
             <a class="nav-link dropdown-toggle" id="dropdown-flag" href="javascript:void(0);" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <i class="flag-icon flag-icon-us"></i>
@@ -266,7 +267,7 @@
           <a class="nav-link dropdown-toggle dropdown-user-link" id="dropdown-user" href="javascript:void(0);" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <div class="user-nav d-sm-flex d-none">
               <span class="user-name font-weight-bolder">{{ auth()->user()->name }}</span>
-              {{-- <span class="user-status">{{auth()->user()->roles[0]->name}}</span> --}}
+              <span class="user-status">{{auth()->user()->roles[0]->name}}</span>
             </div>
             <div class="avatar-wrapper">
               <div class="avatar  bg-light-secondary" >

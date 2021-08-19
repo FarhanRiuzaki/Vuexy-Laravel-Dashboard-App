@@ -32,7 +32,14 @@ $(function () {
         donutChartConfig = {
         chart: {
             // height: 350,
-            type: 'donut'
+            type: 'donut',
+            events: {
+                dataPointSelection: function(event, chartContext, config) {
+                    var label = config.w.config.labels[config.dataPointIndex];
+                    $('#componentHasPageLabel-{{ $comp->sequence }}').text(label);
+                    $('#componentHasPage-{{ $comp->sequence }}').modal('show');
+                }
+            }
         },
         legend: {
             show: true,
@@ -43,7 +50,7 @@ $(function () {
         dataLabels: {
             enabled: true,
             formatter: function (val, opt) {
-            return parseInt(val) + '%';
+            return parseInt(val) + '%'; 
             }
         },
         plotOptions: {
