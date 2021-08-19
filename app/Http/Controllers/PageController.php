@@ -21,6 +21,13 @@ class PageController extends Controller
 
     public function index(Request $req, $id, $url, $sequence)
     {
+        // SEARCH COMPONENT FITURE 
+        // dd($req->all('start_date'));
+        $search     = [];
+        if($req->all()){
+            $search     = $req->all();
+        }
+
         // call api controller 
         $api        = new ApiController();
         $request    = new \Illuminate\Http\Request();
@@ -56,7 +63,7 @@ class PageController extends Controller
             if($val->api_type == 'php'){
                 if($val->componentParameterApi){
                     $param_request = $val->componentParameterApi->pluck('value', 'name')->toArray();
-                    $request->replace($param_request);
+                    $request->replace(array_merge($param_request,$req->all()));
                 }
                 $api    = $api->getFromApi($val->api_name, $request);
             }
@@ -81,7 +88,8 @@ class PageController extends Controller
             'template'      => $template,
             'sequence'      => $sequence,
             'url_page'      => $url_page,
-            'data'          => $data
+            'data'          => $data,
+            'search'        => $search
         ]);
     }
 }

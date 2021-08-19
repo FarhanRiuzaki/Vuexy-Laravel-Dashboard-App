@@ -11,6 +11,7 @@
         $chart          = 0;
         $table          = 0;
         $parameter_api  = [];
+        $current_URL    = Request::url();
     @endphp
 
     @foreach ($template->templateDetail as $item)
@@ -36,13 +37,14 @@
                                 $parameter_api[$val_api->name] = $val_api->value;
                             }
                         }
-                        
+                        $request_api = array_merge($parameter_api, $search);
                         // mengecek component apakah memiliki page
                         if (@$comp->componentHasPage->isNotEmpty()) {
                             componentHasPage($comp->componentHasPage, $comp->sequence, $url_page);
                         }
                         
-                        $api_param      = json_encode($parameter_api);
+                        // set parameter api 
+                        $api_param      = json_encode($request_api);
                         $parameter_api  = [];
                     @endphp
                     <div class="col-xs-12 col-md-{{ $comp->column_size }}">
