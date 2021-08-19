@@ -58,32 +58,67 @@
                             {{ Form::inputNumber('Sequence: ', 'sequence', null, null, ['placeholder' => 'Sequence', 'required'])}}
                         </div>
                     </div>
-               
-                    <h4 class="mb-0 pt-2">Add Component Parameter API</h4>
-                    {{-- Body --}}
-                    <div class="table-responsive pt-2">
-                        <table class="table table-bordered tableParam">
-                            <thead>
-                                <tr class="text-center vertical">
-                                    <th width='4%' class="font-weight-bold">No</th>
-                                    <th width='45%' class="font-weight-bold">Name</th>
-                                    <th width='45%' class="font-weight-bold">Value</th>
-                                    <th width='5%' class="font-weight-bold">Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="tr-input text-center">
-                                    <td colspan="3"><b>Parameter API</b></td>
-                                    <td width='5px'>
-                                        <button type="button" class="btn btn-success btn-icon btn-sm addParam">
-                                            <x-bi-plus-circle/>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                </div>
+                {{-- Param API --}}
+                <div class="card-header border-bottom p-1">
+                    <div class="head-label">
+                        <h4 class="mb-0">Add Component Parameter API</h4>
                     </div>
                 </div>
+                {{-- Body --}}
+                <div class="table-responsive pt-2">
+                    <table class="table table-bordered" id="tableParam">
+                        <thead>
+                            <tr class="text-center vertical">
+                                <th width='4%' class="font-weight-bold">No</th>
+                                <th width='45%' class="font-weight-bold">Name</th>
+                                <th width='45%' class="font-weight-bold">Value</th>
+                                <th width='5%' class="font-weight-bold">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="tr-input text-center">
+                                <td colspan="3"><b>Parameter API</b></td>
+                                <td width='5px'>
+                                    <button type="button" class="btn btn-success btn-icon btn-sm" id="addParam">
+                                        <x-bi-plus-circle/>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                {{-- End of Param API --}}
+                {{-- Component has Page --}}
+                <div class="card-header border-bottom p-1">
+                    <div class="head-label">
+                        <h4 class="mb-0">Add Component Page</h4>
+                    </div>
+                </div>
+                {{-- Body --}}
+                <div class="table-responsive pt-2">
+                    <table class="table table-bordered" id="tablePage">
+                        <thead>
+                            <tr class="text-center vertical">
+                                <th width='4%' class="font-weight-bold">No</th>
+                                <th width='45%' class="font-weight-bold">Page</th>
+                                <th width='45%' class="font-weight-bold">Sequence</th>
+                                <th width='5%' class="font-weight-bold">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="tr-input text-center">
+                                <td colspan="3"><b>Component Page</b></td>
+                                <td width='5px'>
+                                    <button type="button" class="btn btn-success btn-icon btn-sm" id="addPage">
+                                        <x-bi-plus-circle/>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                {{-- End of Param API --}}
                 {!! Form::close() !!}
             </div>
         </div>
@@ -96,7 +131,7 @@
 <script>
     // add component parameter api
     no  = 0;
-    $('body').on('click', '.addParam', function () {
+    $('body').on('click', '#addParam', function () {
         no++;
         html = '<tr>'
             + "<td class='number text-center'>"
@@ -112,8 +147,8 @@
                 + '<button type="button" class="btn btn-danger btn-icon btn-sm dellParam">'+ '<i class="fa fa-times-circle" style="font-size:16px"></i>' +'</button>'
             + "</td>"
             + "</tr>";
-        console.log(html);
-        $('.tableParam tbody').append(html);
+        // console.log(html);
+        $('#tableParam tbody').append(html);
     });
 
     // delete component parameter api
@@ -121,7 +156,7 @@
         var tr = $(this).closest("tr");
             tr.remove();
 
-            $.each($(".tableParam tbody tr:not(.tr-input)"),function(e,item){
+            $.each($("#tableParam tbody tr:not(.tr-input)"),function(e,item){
                 //ganti nomor per TR
                 var no = e*1 +1;
                 $(this).find(".number").html(no);
@@ -133,6 +168,61 @@
                 })
             })
             no = no - 1;
+    });
+
+    var option = "";
+    var arrPage = JSON.parse(`<?php echo $page; ?>`);
+    $.each(arrPage, function( index, value ) {
+        // console.log( index + ": " + value );
+        option+= '<option value=' + index + '>' + value + '</option>'
+    });
+
+    // add component page
+    nop  = 0;
+    $('body').on('click', '#addPage', function () {
+        nop++;
+        html = '<tr>'
+            + "<td class='numberPage text-center'>"
+                + nop
+            +"</td>"
+            + "<td>"
+                + "<select data-name='page_id' name='component_has_page["+nop+"][page_id]' class='form-control'>"
+                    + option
+                + "</select>"
+            +"</td>"
+            + "<td>"
+                + "<input type='text' data-name='sequence' name='component_has_page["+nop+"][sequence]' class='form-control' value='" + nop + "'>"
+            +"</td>"
+            + "<td class='text-center'>"
+                + '<button type="button" class="btn btn-danger btn-icon btn-sm dellPage">'+ '<i class="fa fa-times-circle" style="font-size:16px"></i>' +'</button>'
+            + "</td>"
+            + "</tr>";
+        // console.log(html);
+        $('#tablePage tbody').append(html);
+    });
+
+    // delete component parameter api
+    $('body').on('click', '.dellPage', function () {
+        var tr = $(this).closest("tr");
+            tr.remove();
+
+            $.each($("#tablePage tbody tr:not(.tr-input)"),function(p,item){
+                //ganti nomor per TR
+                var nop = p*1 +1;
+                $(this).find(".numberPage").html(nop);
+                $(this).find("input").val(nop);
+
+                //NEANGAN INPUTAN PER TR
+                $.each($(this).find("input"),function(s,f){
+                    var pageName = $(this).data("name");
+                    $(this).attr("name","component_has_page["+nop+"]["+pageName+"]");
+                })
+                $.each($(this).find("select"),function(s,f){
+                    var pageName = $(this).data("name");
+                    $(this).attr("name","component_has_page["+nop+"]["+pageName+"]");
+                })
+            })
+            nop = nop - 1;
     });
 </script>
 @endpush
