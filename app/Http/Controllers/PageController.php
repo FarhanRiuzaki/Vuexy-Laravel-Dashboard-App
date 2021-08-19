@@ -24,7 +24,6 @@ class PageController extends Controller
         // call api controller 
         $api        = new ApiController();
         $request    = new \Illuminate\Http\Request();
-        // dd($api);
 
         // get role uuid
         $role_uuid  = auth()->user()->roles->first()->id;
@@ -37,7 +36,7 @@ class PageController extends Controller
         }
         
         // Get template 
-        $template   = Template::with(['templateDetail.page.component.componentParameterApi'
+        $template   = Template::with(['templateDetail.page.component.componentParameterApi', 'templateDetail.page.component.componentHasPage.page.templateDetail'
         , 'templateDetail' => function($q) use($sequence)
         {
             $q->where('sequence', $sequence);
@@ -48,7 +47,7 @@ class PageController extends Controller
         {
             $q->where('role_id', $role_uuid);
         })->where('name', $url)->find($id);
-        
+        // dd($template);
 
         // jika api type adalah PHP 
         // proses untuk stroe data 

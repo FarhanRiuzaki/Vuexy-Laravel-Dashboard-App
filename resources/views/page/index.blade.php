@@ -11,7 +11,6 @@
         $chart          = 0;
         $table          = 0;
         $parameter_api  = [];
-        
     @endphp
 
     @foreach ($template->templateDetail as $item)
@@ -37,10 +36,15 @@
                                 $parameter_api[$val_api->name] = $val_api->value;
                             }
                         }
+                        
+                        // mengecek component apakah memiliki page
+                        if (@$comp->componentHasPage->isNotEmpty()) {
+                            componentHasPage($comp->componentHasPage, $comp->sequence, $url_page);
+                        }
+                        
                         $api_param      = json_encode($parameter_api);
                         $parameter_api  = [];
                     @endphp
-
                     <div class="col-xs-12 col-md-{{ $comp->column_size }}">
                             @include('page.components.' . $all[0] . '.' . $all[1] )
                     </div>            

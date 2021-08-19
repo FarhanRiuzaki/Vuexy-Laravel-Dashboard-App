@@ -135,7 +135,6 @@ return [
     */
 
     'providers' => [
-
         /*
          * Laravel Framework Service Providers...
          */
@@ -179,6 +178,7 @@ return [
         App\Providers\MenuServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
         OwenIt\Auditing\AuditingServiceProvider::class,
+        Mews\Captcha\CaptchaServiceProvider::class,
     ],
 
     /*
@@ -193,7 +193,6 @@ return [
     */
 
     'aliases' => [
-
         'App' => Illuminate\Support\Facades\App::class,
         'Arr' => Illuminate\Support\Arr::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
@@ -232,6 +231,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         // custom theme helper
         'Helper' => App\Helpers\Helper::class,
+        'Captcha' => Mews\Captcha\Facades\Captcha::class,
     ],
 
 ];

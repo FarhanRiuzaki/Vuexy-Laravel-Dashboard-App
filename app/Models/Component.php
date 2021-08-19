@@ -24,4 +24,9 @@ class Component extends Model
     {
         return $this->belongsTo(Page::class, 'page_id', 'id');
     }
+
+    public function componentHasPage()
+    {
+        return $this->hasMany(ComponentHasPage::class, 'component_id');
+    }
 }
