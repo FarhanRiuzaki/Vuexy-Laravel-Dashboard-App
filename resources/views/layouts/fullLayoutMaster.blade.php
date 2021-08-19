@@ -22,7 +22,7 @@ $configData = Helper::applClasses();
   @include('panels/styles')
 
   {{-- Include core + vendor Styles --}}
-  @include('panels/styles')
+  {{-- @include('panels/styles') --}}
   {{-- @section('vendor-style') --}}
     <!-- vendor css files -->
     <link rel="stylesheet" href="{{ asset(mix('vendors/css/extensions/toastr.min.css')) }}">
