@@ -234,6 +234,7 @@ class ComponentTemplateController extends Controller
                 $button = ' <a href="' . route($this->route . '.show', $data->id) . '" class="btn btn-icon btn-warning btn-sm"  data-toggle="tooltip" title="Show">
                     ' . SVGI('bi-eye') . '
                     </a>';
+                    
                 if (auth()->user()->can($this->permission . '.edit')) {
                     $button .= ' <a href="' . route($this->route . '.edit', $data->id) . '" class="btn btn-icon btn-primary btn-sm"  data-toggle="tooltip" title="Edit">
                     ' . SVGI('bi-pencil-square') . '
