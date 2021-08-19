@@ -11,7 +11,7 @@
  Target Server Version : 50724
  File Encoding         : 65001
 
- Date: 09/08/2021 11:45:47
+ Date: 19/08/2021 09:33:38
 */
 
 SET NAMES utf8mb4;
@@ -39,7 +39,13 @@ CREATE TABLE `audits`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `audits_auditable_type_auditable_id_index`(`auditable_type`, `auditable_id`) USING BTREE,
   INDEX `audits_user_id_user_type_index`(`user_id`, `user_type`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of audits
+-- ----------------------------
+INSERT INTO `audits` VALUES (1, NULL, NULL, 'created', 'App\\Models\\User', 'cdbbc2f3-7259-4424-8b71-ccc7f0f1a4dc', '[]', '{\"name\":\"farhan riuzaki\",\"username\":\"farhanriuzaki\",\"email\":\"riuzakif@gmail.com\",\"password\":\"$2y$10$UZC.FuCeHvRANGMbxzlJOOqAcZu2JK0lW9LiAE5DZoR\\/0qfmBGciq\",\"id\":\"cdbbc2f3-7259-4424-8b71-ccc7f0f1a4dc\",\"updated_at\":\"2021-08-09 15:04:51\",\"created_at\":\"2021-08-09 15:04:51\"}', 'http://localhost:8000/register', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36', NULL, '2021-08-09 15:04:51', '2021-08-09 15:04:51');
+INSERT INTO `audits` VALUES (2, NULL, NULL, 'created', 'App\\Models\\User', 'd0f02d33-a9bd-4b79-8435-ff9744be298f', '[]', '{\"name\":\"Farhan Riuzaki\",\"username\":\"farhans\",\"email\":\"farhan@gmail.com\",\"password\":\"$2y$10$OlDryvLaiA10RbF0J7buzuxQ.X\\/qORU\\/G1Z64mt2YRbpLw5gh6EuK\",\"id\":\"d0f02d33-a9bd-4b79-8435-ff9744be298f\",\"updated_at\":\"2021-08-09 15:42:36\",\"created_at\":\"2021-08-09 15:42:36\"}', 'http://localhost:8000/register', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36', NULL, '2021-08-09 15:42:36', '2021-08-09 15:42:36');
 
 -- ----------------------------
 -- Table structure for channels
@@ -77,6 +83,23 @@ CREATE TABLE `component_details`  (
   `updated_at` timestamp(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for component_has_pages
+-- ----------------------------
+DROP TABLE IF EXISTS `component_has_pages`;
+CREATE TABLE `component_has_pages`  (
+  `component_id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `page_id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `sequence` int(11) NOT NULL
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of component_has_pages
+-- ----------------------------
+INSERT INTO `component_has_pages` VALUES ('9', '1', 1);
+INSERT INTO `component_has_pages` VALUES ('9', '2', 2);
+INSERT INTO `component_has_pages` VALUES ('10', '1', 1);
 
 -- ----------------------------
 -- Table structure for component_parameter_apis
@@ -182,7 +205,7 @@ CREATE TABLE `migrations`  (
   `migration` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 21 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 22 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of migrations
@@ -207,6 +230,7 @@ INSERT INTO `migrations` VALUES (17, '2021_07_21_092303_create_component_paramet
 INSERT INTO `migrations` VALUES (18, '2021_07_26_023525_paramter_api', 7);
 INSERT INTO `migrations` VALUES (19, '2021_08_06_100156_update_component', 7);
 INSERT INTO `migrations` VALUES (20, '2021_08_06_150618_change_data_type_all_table', 8);
+INSERT INTO `migrations` VALUES (21, '2021_08_18_104235_create_component_has_pages_table', 9);
 
 -- ----------------------------
 -- Table structure for model_has_permissions
@@ -434,6 +458,7 @@ CREATE TABLE `template_details`  (
 -- ----------------------------
 INSERT INTO `template_details` VALUES ('1', '2', '1', 1, NULL, NULL, NULL, NULL);
 INSERT INTO `template_details` VALUES ('2', '4', '2', 1, NULL, NULL, NULL, NULL);
+INSERT INTO `template_details` VALUES ('3', '2', '2', 2, NULL, NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for templates
@@ -485,8 +510,12 @@ CREATE TABLE `users`  (
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES ('bd68286d-a631-4cf6-b5de-ddb217ebe074', 'Farhan Riuzaki', 'farhan', 'superadmin@gmail.com', NULL, '$2y$10$wg92T4iOqkzLG5TtDXYjiOXP.VoFp3r9Ap8fL.BYCAobvCbpIjQMy', NULL, '1', '2021-07-09 02:44:21', NULL, '2021-07-09 02:44:21', NULL);
-INSERT INTO `users` VALUES ('ca4250e0-b5ac-40a7-a8e1-a00f6c95f33a', 'amdhika', 'andhika', 'andhika@gmail.com', NULL, '$2y$10$OviS3fjfJgrM6Du11ayHUOKAY8LHIQNMWoqbXJBSS68lTyT539TIe', NULL, NULL, '2021-08-09 11:37:40', NULL, '2021-08-09 11:37:40', NULL);
-INSERT INTO `users` VALUES ('efc01a01-8ea7-4ab4-bf96-394d8e614732', 'Farhan Riuzaki', 'farhanriuzaki', 'riuzakif@gmail.com', NULL, '$2y$10$If0wPRmuFR0kJq0U8psSN.dsN1yzNrf73EyoTBwfEUMLKnh8EFWQa', NULL, '1', '2021-07-13 14:11:27', NULL, '2021-07-13 14:15:32', NULL);
+INSERT INTO `users` VALUES ('0686c6f7-1f40-4b41-b0b5-2e0d8fc499ea', 'Agus Subarkah', 'agussb', 'agus@gmail.com', '2021-08-12 17:28:57', '$2y$10$jG7IGEV11SVo33c2tIDJp.Uh8JSOPgBLuttT8YXfGcMJIVkur78ce', NULL, NULL, '2021-08-12 17:28:31', NULL, '2021-08-12 17:28:57', '0686c6f7-1f40-4b41-b0b5-2e0d8fc499ea');
+INSERT INTO `users` VALUES ('8f3b4269-84b9-4791-a585-5ef3e4bcd0d8', 'hamid', 'hamid', 'hamid@gmail.com', '2021-08-12 11:24:22', '$2y$10$75Hh8TqC/17zvgq/HnZjluU4tZA6EDP7t5rPOiuUD8YTCWBckXhpW', NULL, NULL, '2021-08-12 11:23:42', NULL, '2021-08-12 11:24:22', '8f3b4269-84b9-4791-a585-5ef3e4bcd0d8');
+INSERT INTO `users` VALUES ('bd68286d-a631-4cf6-b5de-ddb217ebe074', 'Farhan Riuzaki', 'farhan', 'superadmin@gmail.com', '2021-08-12 11:24:22', '$2y$10$wg92T4iOqkzLG5TtDXYjiOXP.VoFp3r9Ap8fL.BYCAobvCbpIjQMy', NULL, '1', '2021-07-09 02:44:21', NULL, '2021-07-09 02:44:21', NULL);
+INSERT INTO `users` VALUES ('bfd9ad35-7797-4cb7-921f-c2a2b29f346b', 'hamis', 'hamis', 'hamis@gmail.com', '2021-08-12 17:22:32', '$2y$10$0NZ92Qg0DK6qhYwabpbiFuRXvdEJkpRKDRX/wJi2BpkJVAq0PajKu', NULL, NULL, '2021-08-12 17:21:44', NULL, '2021-08-12 17:22:32', 'bfd9ad35-7797-4cb7-921f-c2a2b29f346b');
+INSERT INTO `users` VALUES ('cadc300b-0eac-4657-b36d-f3deb068313c', 'Hamid', 'hami123', 'hamid123@gmail.com', '2021-08-12 15:33:22', '$2y$10$uJgn7JmGuK3kz33xGi.eMuR2wNSS9wtt2uzdHz0Dds6uxbeWb6J5O', NULL, NULL, '2021-08-12 15:31:03', NULL, '2021-08-12 15:33:22', 'cadc300b-0eac-4657-b36d-f3deb068313c');
+INSERT INTO `users` VALUES ('d0f02d33-a9bd-4b79-8435-ff9744be298f', 'Farhan Riuzaki', 'farhans', 'farhan@gmail.com', NULL, '$2y$10$OlDryvLaiA10RbF0J7buzuxQ.X/qORU/G1Z64mt2YRbpLw5gh6EuK', NULL, NULL, '2021-08-09 15:42:36', NULL, '2021-08-09 15:42:36', NULL);
+INSERT INTO `users` VALUES ('efc01a01-8ea7-4ab4-bf96-394d8e614732', 'Farhan Riuzaki', 'farhanriuzaki', 'riuzakifs@gmail.com', NULL, '$2y$10$If0wPRmuFR0kJq0U8psSN.dsN1yzNrf73EyoTBwfEUMLKnh8EFWQa', NULL, '1', '2021-07-13 14:11:27', NULL, '2021-07-13 14:15:32', NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;
