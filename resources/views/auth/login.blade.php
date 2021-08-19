@@ -15,7 +15,7 @@
       <!-- Brand logo-->
       <a class="brand-logo" href="{{ url('/') }}">
         <img src="{{ asset('landingPage/img/logo-light.png') }}" alt="" style="max-height: 50px">
-        <h2 class="brand-text text-warning ml-1 mt-50"><i>Dashboard </i>Bank Mega</h2>
+        <h2 class="brand-text text-warning ml-1 mt-50"><i>Dashboard </i>MSMILE</h2>
       </a>
       <!-- /Brand logo-->
       <!-- Left Text-->
@@ -29,7 +29,7 @@
       <!-- Login-->
       <div class="d-flex col-lg-4 align-items-center auth-bg px-2 p-lg-3">
         <div class="col-12 col-sm-8 col-md-6 col-lg-12 px-xl-2 mx-auto">
-          <h2 class="card-title font-weight-bold mb-1">Welcome to Dev App! &#x1F44B;</h2>
+          <h2 class="card-title font-weight-bold mb-1">Welcome to Dashboard! &#x1F44B;</h2>
           <p class="card-text mb-2">Please sign-in to your account and start the adventure</p>
           <form class="auth-login-form mt-2" method="POST" action="{{ route('login') }}">
             @csrf
