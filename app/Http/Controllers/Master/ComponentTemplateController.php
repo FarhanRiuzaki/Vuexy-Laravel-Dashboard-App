@@ -77,19 +77,19 @@ class ComponentTemplateController extends Controller
             'sequence'      => 'required'
         ]);
 
-        // get semua data $request
-        $requestData = $request->All();
-        // assign 'component..' ke param_api
-        $param_api   = $requestData['component_parameter_api'];
-        // hapus value requestData[component...]
+        $requestData    = $request->All();
+
+        $compo_page     = $requestData['component_has_page'];
+        $param_api      = $requestData['component_parameter_api'];
+        
+        unset($requestData['component_has_page']);
         unset($requestData['component_parameter_api']);
         
         DB::beginTransaction();
         try {
-            // store ke component
             $component = Component::create($requestData);
-            // store param_api ke child (componentParameterApi)
             $component->componentParameterApi()->createMany($param_api);
+            $component->componentHasPage()->createMany($compo_page);
 
             DB::commit();
         } catch (\Throwable $th) {
