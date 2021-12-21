@@ -13,6 +13,8 @@
   @endif
 
   @if (count($errors) > 0)
-    toastr.error("Whoops! There were some problems, please try again later", 'Error'    );
+    @foreach ($errors->all() as $error)
+        toastr.error('{{ $error }}', 'Error'    );
+    @endforeach
   @endif
 </script>
