@@ -38,7 +38,7 @@ $configData = Helper::applClasses();
   <div class="auth-inner row m-0">
     <!-- Brand logo-->
     <a class="brand-logo" href="{{ url('/') }}" style="margin-left: 17% !important; margin-top: 2% !important">
-      <img src="{{ asset('images/icons/mega (2).png') }}" alt="" style="max-height: 50px">
+      <img src="{{ asset('images/logo/logo.png') }}" alt="" style="max-height: 50px">
       <h2 class="brand-text text-warning ml-1 mt-50"><i>Dashboard </i>MSMILE</h2>
     </a>
     <!-- /Brand logo-->

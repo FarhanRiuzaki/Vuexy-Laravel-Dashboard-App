@@ -11,9 +11,9 @@ $configData   = Helper::applClasses();
       <li class="nav-item mr-auto">
         <a class="navbar-brand" href="{{url('/')}}">
           <span class="brand-logo">
-            <img src="{{ asset('images/avatars/mega.png') }}" alt="" style="max-height: 80px">
+            <img src="{{ asset('images/logo/logo.png') }}" alt="" style="max-height: 80px">
           </span>
-          <h2 class="brand-text text-warning">DPS</h2>
+          <h2 class="brand-text">BASE APP</h2>
         </a>
       </li>
       <li class="nav-item nav-toggle">

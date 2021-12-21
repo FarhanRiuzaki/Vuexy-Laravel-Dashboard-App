@@ -42,14 +42,14 @@
             <li class="nav-item"><a class="nav-link menu-toggle" href="javascript:void(0);"><i class="ficon" data-feather="menu"></i></a></li>
           </ul>
           <ul class="nav navbar-nav bookmark-icons" >
-            <p class="text-white" style="
+            {{-- <p class="text-white" style="
             margin: 0;
             position: absolute;
             top: 51%;
             left: 20%;
             transform: translate(-50%, -50%);
             font-size: 20px;
-            font-weight: bold">DASHBOARD BACK OFFICE POINT SYSTEM</p>
+            font-weight: bold">DASHBOARD BACK OFFICE POINT SYSTEM</p> --}}
           </ul>
           {{-- <ul class="nav navbar-nav bookmark-icons">
             <li class="nav-item d-none d-lg-block"><a class="nav-link" href="{{url('app/email')}}" data-toggle="tooltip" data-placement="top" title="Email"><i class="ficon" data-feather="mail"></i></a></li>

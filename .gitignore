@@ -3,7 +3,6 @@
 /public/hot
 /public/data
 /public/fonts
-/public/images
 /public/storage
 /public/js
 /public/css
@@ -23,3 +22,4 @@ supervisord.pid
 
 # git ignone except 
 !*/public/js/scripts/custom.js
+!*/public/css/documentation.css

@@ -10,14 +10,14 @@
     "production": "mix --production"
   },
   "dependencies": {
-    "@amcharts/amcharts4": "^4.10.20",
+    "@amcharts/amcharts4": "^4.10.23",
     "@amcharts/amcharts4-fonts": "^4.0.1",
     "@amcharts/amcharts4-geodata": "^4.1.21",
     "bootstrap": "4.6.0",
     "font-awesome": "^4.7.0"
   },
   "devDependencies": {
-    "axios": "^0.21",
+    "axios": "^0.21.4",
     "cross-env": "^5.2.1",
     "jquery": "^3.2",
     "laravel-mix": "^6.0.6",

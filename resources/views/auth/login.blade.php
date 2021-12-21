@@ -14,14 +14,14 @@
   <div class="auth-inner row m-0">
       <!-- Brand logo-->
       <a class="brand-logo" href="{{ url('/') }}" style="margin-left: 10% !important; margin-top: 2% !important">
-        <img src="{{ asset('images/icons/mega (2).png') }}" alt="" style="max-height: 50px">
-        <h2 class="brand-text text-warning ml-1 mt-50"><i>Dashboard Back office </i>Point System</h2>
+        <img src="{{ asset('images/logo/logo.png') }}" alt="" style="max-height: 50px">
+        <h2 class="brand-text ml-1 mt-50">BASE APPLICATION</h2>
       </a>
       <!-- /Brand logo-->
       <!-- Left Text-->
       <div class="d-none d-lg-flex col-lg-8 align-items-center p-5">
         <div class="w-100 d-lg-flex align-items-center justify-content-center px-5">
-          <img class="img-fluid" src="{{asset('images/pages/login-svg.svg')}}" alt="Login V2" style="max-height: 500px"/>
+          <img class="img-fluid" src="{{asset('images/pages/login-svg.svg')}}" alt="Login V2" style="max-height: 700px"/>
           {{-- <img class="img-fluid" src="{{asset('images/pages/login-v2.svg')}}" alt="Login V2" /> --}}
         </div>
       </div>
