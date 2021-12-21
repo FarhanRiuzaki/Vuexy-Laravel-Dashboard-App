@@ -1,3 +1,8 @@
+
+# git ignone except 
+!*/public/js/scripts/custom.js
+!*/public/css/documentation.css
+
 # git ignore
 /node_modules
 /public/hot
@@ -19,7 +24,3 @@ yarn-error.log
 /vuexy-shell-scripts
 supervisord.log
 supervisord.pid
-
-# git ignone except 
-!*/public/js/scripts/custom.js
-!*/public/css/documentation.css
