@@ -82,9 +82,8 @@ class RoleController extends Controller
         $this->validate($request, [
             'name'          => 'required|unique:roles,name',
             'permission'    => 'required',
-            'merchant_id'   => 'required',
         ]);
-        $role = Role::create(['name' => $request->input('name'),'merchant_id' => $request->input('merchant_id')]);
+        $role = Role::create(['name' => $request->input('name')]);
         $role->syncPermissions($request->input('permission'));
 
         return redirect()->route('roles.index')

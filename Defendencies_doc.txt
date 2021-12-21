@@ -8,7 +8,7 @@
 - Nested Array          : http://creative-punch.net/2014/01/creating-nested-array-items-parent-ids/
 - OCR                   : https://reposhub.com/php/miscellaneous/alimranahmed-LaraOCR.html
 - ApexChart             : https://apexcharts.com/javascript-chart-demos/pie-charts/simple-donut/
-
+- Command Doc           : https://ourcodeworld.com/articles/read/248/how-to-create-a-custom-console-command-artisan-for-laravel-5-3
 
 #CATATAN MIGRASI GIT 
 
@@ -28,6 +28,15 @@ C:\NEW LARAVEL\Project\dev_vuexy_laravel\vendor\blade-ui-kit\blade-icons\src\Svg
 
 - Auto Permission 
     Controller -r 
+
+    protected function parse()
+    {
+         // otomatisasi permission jika jenisnya resource by farhan
+        // dd($this->tokens); 
+        if($this->tokens){
+            savePermission($this->tokens);
+        }
+
 
     PATH: C:\NEW LARAVEL\Project\dev_vuexy_laravel\vendor\symfony\console\Input\ArgvInput.php
 

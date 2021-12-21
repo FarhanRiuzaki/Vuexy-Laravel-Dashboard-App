@@ -10,9 +10,9 @@ use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 use OwenIt\Auditing\Contracts\Auditable;
 
-class User extends Authenticatable implements MustVerifyEmail 
+class User extends Authenticatable implements Auditable, MustVerifyEmail 
 {
-    // use \OwenIt\Auditing\Auditable;  
+    use \OwenIt\Auditing\Auditable;  
     use HasRoles, HasFactory, Notifiable, RecordSignatureUUID;
 
     

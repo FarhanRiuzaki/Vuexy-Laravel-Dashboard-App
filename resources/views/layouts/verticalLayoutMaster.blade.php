@@ -1,7 +1,7 @@
 <body class="vertical-layout vertical-menu-modern {{ $configData['showMenu'] === true ? '2-columns' : '1-column' }}
 {{ $configData['blankPageClass'] }} {{ $configData['bodyClass'] }}
 {{ $configData['verticalMenuNavbarType'] }}
-{{ $configData['sidebarClass'] }} {{ $configData['footerType'] }}" data-menu="vertical-menu-modern" data-col="{{ $configData['showMenu'] === true ? '2-columns' : '1-column' }}" data-layout="{{ ($configData['theme'] === 'light') ? '' : $configData['layoutTheme'] }}" style="{{ $configData['bodyStyle'] }}" data-framework="laravel" data-asset-path="{{ asset('/')}}">
+{{ $configData['sidebarClass'] }} {{ $configData['footerType'] }}" data-menu="vertical-menu-modern" data-col="{{ $configData['showMenu'] === true ? '2-columns' : '1-column' }}" data-layout="{{ ($configData['theme'] === 'light') ? '' : $configData['layoutTheme'] }}" style="{{ $configData['bodyStyle'] }}" data-framework="laravel" data-asset-path="{{ asset('/')}}" >
 
   {{-- Include Sidebar --}}
   @if((isset($configData['showMenu']) && $configData['showMenu'] === true))
@@ -69,7 +69,21 @@
 
   <script src="{{ asset(mix('vendors/js/extensions/sweetalert2.all.min.js')) }}"></script>
   <script src="{{ asset(mix('vendors/js/extensions/polyfill.min.js')) }}"></script>
+  <script src="{{ asset(mix('vendors/js/forms/cleave/cleave.min.js')) }}"></script>
+  <script src="{{ asset(mix('vendors/js/forms/cleave/addons/cleave-phone.us.js')) }}"></script>
+  {{-- <SCRIPT language=JavaScript>
 
+  <!-- http://www.spacegun.co.uk -->
+
+  var message = "**This page is no longer active**";
+
+  function rtclickcheck(keyp){ if (navigator.appName == "Netscape" && keyp.which == 3){ alert(message); return false; }
+
+  if (navigator.appVersion.indexOf("MSIE") != -1 && event.button == 2) { alert(message); return false; } }
+
+  document.onmousedown = rtclickcheck;
+
+  </SCRIPT> --}}
 <script type="text/javascript">
     $(window).on('load', function() {
       if (feather) {
@@ -79,6 +93,15 @@
         });
       }
     })
+    
+    //Numeral
+    numeralMask = $('.numeralThousands');
+    if (numeralMask.length) {
+      new Cleave(numeralMask, {
+        numeral: true,
+        numeralThousandsGroupStyle: 'thousand'
+      });
+    }
     
      // FUNGSI DELETE DENGAN AJAX ALL FORM
      $('body').on('click', '.btn-delete', function (e) {

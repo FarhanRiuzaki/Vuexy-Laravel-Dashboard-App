@@ -33,6 +33,14 @@
     border-radius: 50%;
     font-size: 1.2rem;
 }
+
+.main-menu.menu-light .navigation > li.active > a {
+    background: linear-gradient(118deg, #ff9f43, rgb(255 217 181)) !important;
+      box-shadow: 0 0 10px 1px rgb(255 159 67 / 53%) !important;
+      color: #fff;
+      font-weight: 400;
+      border-radius: 4px;
+  }
 </style>
 {{-- Laravel Style --}}
 <link rel="stylesheet" href="{{ asset(mix('css/overrides.css')) }}" />

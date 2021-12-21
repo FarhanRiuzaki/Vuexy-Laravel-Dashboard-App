@@ -1,8 +1,16 @@
 <?php
+//The rest of my index page
 
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Http\Request;
 
+$url= $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+$needle = "view-source:";
+// var_dump(url()->current());
+// die($url);
+if (strpos($url,$needle)) { echo "You can not see me";}
+else {
+ini_set('max_execution_time', 36000); //3 minutes
 define('LARAVEL_START', microtime(true));
 
 /*
@@ -53,3 +61,4 @@ $response = tap($kernel->handle(
 ))->send();
 
 $kernel->terminate($request, $response);
+}

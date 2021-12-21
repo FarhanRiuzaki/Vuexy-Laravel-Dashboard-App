@@ -262,7 +262,7 @@ function topThreeAmt($item, $merchant)
 
 function createdAt($created)
 {
-    return date('Y-m-d H:i:s', strtotime($created));
+    return date('Y-m-d', strtotime($created)) . '<br>' . date('H:i:s', strtotime($created)) ;
 }
 
 function componentHasPage($data, $seq, $url_page)
@@ -289,8 +289,11 @@ function componentHasPage($data, $seq, $url_page)
                                 foreach ($data as $key => $value) {
                                     $templateDetail = $value->page->templateDetail;
                                     foreach ($templateDetail as $k => $v) {
+
+                                        // sequence component has page disamakan dengan yg ada di template details 
+                                        // dump($value->sequence, $v->sequence);
                                         if($value->sequence == $v->sequence){
-                                            $url_page   =  'dashboard/'. $v->template->id . '/' .  $v->template->name  .'/'. encrypt($v->sequence);
+                                            $url_page   =  'dashboard/'. $v->template_id. '/' .  $v->template->name  .'/'. encrypt($v->sequence);
                                         }
                                     }
                                     $html .= '<div class="col-md-12"><a href="'. url($url_page).'"  class="btn mb-50 btn-block btn-primary">'.$value->page->description.'</a></div>';
@@ -302,4 +305,110 @@ function componentHasPage($data, $seq, $url_page)
             </div>';
     echo $html;
 //  dd($data);   
+}
+
+// ENCRYPT ANTON 
+function encrypt_decrypt($action, $string) {
+    $output             = false;
+    $encrypt_method     = "AES-128-CBC";
+    $secret_key         = 'Random1234567890';
+    $secret_iv          = 'RandomInitVector';
+    // hash
+    $key    = $secret_key;
+    // iv - encrypt method AES-256-CBC expects 16 bytes - else you will get a warning
+    $iv     = $secret_iv;
+    
+    if ( $action == 'encrypt' ) {
+        $output = openssl_encrypt($string, $encrypt_method, $key, 0, $iv);
+    } else if( $action == 'decrypt' ) {
+        $output = openssl_decrypt($string, $encrypt_method, $key, 0, $iv);
+    }
+
+    return $output;
+}
+
+// CEK SESSION API 
+function cekSession($phone)
+{
+    //dd(session('accessToken'));
+    $code = '00';
+    if(session('accessToken')){
+        if(session('expiredToken') <= date('Y-m-d H:i:s')){
+            $code = '99';
+        }
+        if(session('phoneToken') != $phone){
+            $code = '99';
+        }
+    }else{
+        $code = '99';
+    }
+
+    $return = [
+        'code' => $code,
+    ];
+
+    return $return;
+}
+
+function encryptor($action, $string) {
+    $output = false;
+
+    $encrypt_method = "AES-256-CBC";
+    //pls set your unique hashing key
+    $secret_key = 'tibs-point';
+    $secret_iv = 'Kimid2988!';
+
+    // hash
+    $key = hash('sha256', $secret_key);
+
+    // iv - encrypt method AES-256-CBC expects 16 bytes - else you will get a warning
+    $iv = substr(hash('sha256', $secret_iv), 0, 16);
+
+    //do the encyption given text/string/number
+    if( $action == 'encrypt' ) {
+        $output = openssl_encrypt($string, $encrypt_method, $key, 0, $iv);
+        $output = base64_encode($output);
+    }
+    else if( $action == 'decrypt' ){
+        //decrypt the given text/string/number
+        $output = openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $iv);
+    }
+    return $output;
+}
+
+function eventType($type)
+{
+    $return = "";
+    switch ($type) {
+    case 'created':
+        $return = '<span class="badge rounded-pill badge-light-success">'.$type.'</span>';
+        break;
+
+    case 'updated':
+        $return = '<span class="badge rounded-pill badge-light-warning">'.$type.'</span>';
+        break;
+
+    case 'deleted':
+        $return = '<span class="badge rounded-pill badge-light-danger">'.$type.'</span>';
+        break;
+    default:
+        # code...
+        break;
+    }
+
+    return $return;
+}
+
+// Cek Valid
+function isValid($cek)
+{
+    $isValid = '';
+    if($cek){
+        $isValid = ' is-invalid';
+    }
+    return $isValid;
+}
+
+function convertNumber($number){
+    return str_replace(',', '', $number);
 }

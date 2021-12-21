@@ -17,30 +17,6 @@ class ChangeDataTypeAllTable extends Migration
             $table->uuid('created_by')->change();
             $table->uuid('updated_by')->change();
         });
-        Schema::table('pages',  function(Blueprint $table){
-            $table->uuid('created_by')->change();
-            $table->uuid('updated_by')->change();
-        });
-        Schema::table('templates',  function(Blueprint $table){
-            $table->uuid('created_by')->change();
-            $table->uuid('updated_by')->change();
-        });
-        Schema::table('template_details',  function(Blueprint $table){
-            $table->uuid('created_by')->change();
-            $table->uuid('updated_by')->change();
-        });
-        Schema::table('merchants',  function(Blueprint $table){
-            $table->uuid('created_by')->change();
-            $table->uuid('updated_by')->change();
-        });
-        Schema::table('channels',  function(Blueprint $table){
-            $table->uuid('created_by')->change();
-            $table->uuid('updated_by')->change();
-        });
-        Schema::table('components',  function(Blueprint $table){
-            $table->uuid('created_by')->change();
-            $table->uuid('updated_by')->change();
-        });
     }
 
     /**

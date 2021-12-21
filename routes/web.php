@@ -1,10 +1,14 @@
 <?php
 
+use App\Http\Controllers\Api\BatchController;
+use App\Http\Controllers\Api\InquiryController;
 use App\Http\Controllers\ApiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AppsController;
+use App\Http\Controllers\AuditBatchController;
+use App\Http\Controllers\AuditController;
 use App\Http\Controllers\UserInterfaceController;
 use App\Http\Controllers\CardsController;
 use App\Http\Controllers\ComponentsController;
@@ -15,15 +19,14 @@ use App\Http\Controllers\TableController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\MiscellaneousController;
 use App\Http\Controllers\AuthenticationController;
-use App\Http\Controllers\ChartsController;
-use App\Http\Controllers\PageController;
+use App\Http\Controllers\Bulk\ApproveBulkController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\Master\ChannelController;
-use App\Http\Controllers\Master\ComponentTemplateController;
-use App\Http\Controllers\Master\MerchantController;
-use App\Http\Controllers\Master\PageTemplateController;
+use App\Http\Controllers\MasterAccountController;
+use App\Http\Controllers\MasterCatalogController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\Bulk\UploadBulkController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -39,8 +42,8 @@ use Illuminate\Support\Facades\Auth;
 
 // Main Page Route
 // Route::get('/', [DashboardController::class,'dashboardEcommerce'])->name('dashboard-ecommerce')->middleware('verified');
-Route::get('/', [DashboardController::class,'dashboardEcommerce'])->name('dashboard-ecommerce');
-
+//Route::get('/', [InquiryController::class,'index']);
+Route::get('/', [DashboardController::class,'index']);
 // Route::get('/', function () {
 //   return view('login');
 // });
@@ -49,32 +52,21 @@ Auth::routes(['verify' => true]);
 // AUTH By Farhan
 Route::get('permissions/datatable',[PermissionController::class,'datatable'])->name('permissions.datatable');
 Route::get('users/update-status/{id}',[UserController::class, 'updateStatus'])->name('users.updateStatus');
-Route::get('channels/datatable', [ChannelController::class, 'datatable'])->name('channels.datatable'); //datatable 'channel'
-Route::get('merchants/datatable', [MerchantController::class, 'datatable'])->name('merchants.datatable'); //datatable 'merchant'
-Route::get('pages/datatable', [PageTemplateController::class, 'datatable'])->name('pages.datatable'); //datatable 'page template'
-Route::get('components/datatable', [ComponentTemplateController::class, 'datatable'])->name('components.datatable'); //datatable 'component template'
+Route::get('/report/pdf', [ReportController::class, 'createPDF'])->name('report.createPDF');
+Route::get('account/datatable',[MasterAccountController::class,'datatable'])->name('account.datatable');
 
 Route::resource('roles',RoleController::class);
 Route::resource('permissions',PermissionController::class);
 Route::resource('users',UserController::class);
 
-// MASTER DASHBOARD ROUTE
-Route::resource('channels', ChannelController::class);
-Route::resource('merchants', MerchantController::class);
-Route::resource('user', UserController::class);
-Route::resource('pages', PageTemplateController::class);
-Route::resource('components', ComponentTemplateController::class);
+// MPC 
+Route::resource('audits',AuditController::class);
+Route::resource('batchs',BatchController::class);
 
-// Auth::routes(['verify' => true]);
-
-// ROUTE UNTUK DASHBOARD DINAMIS 
-Route::get('dashboard/{id}/{url}/{sequence}',[PageController::class,'index'] );
-
-// API DINAMIS 
-Route::get('api/test/{api_name}',[ApiController::class, 'test']); //update status user
-Route::get('api/{api_name}',[ApiController::class, 'getFromApi']); //update status user
-
-Route::get('scrollspy', [DashboardController::class,'scrollspy'])->name('scrollspy');
+Route::resource('master-accounts',MasterAccountController::class);
+Route::resource('reports',ReportController::class);
+Route::resource('upload-bulks',UploadBulkController::class);
+Route::resource('approve-bulks',ApproveBulkController::class);
 
 /* Route Dashboards */
 // Route::group(['prefix' => 'dashboard'], function () {

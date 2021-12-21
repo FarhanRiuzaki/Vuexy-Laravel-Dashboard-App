@@ -7,7 +7,6 @@ use App\Models\Page;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
-
 class PageTemplateController extends Controller
 {
     private $page_title         = "Page Template";
@@ -28,8 +27,17 @@ class PageTemplateController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index() 
     {
+        // date_default_timezone_set('UTC');
+
+        $hash = hash_hmac('sha256', '/v1.0/inquiry/010740025111569&verb=GET&token=Bearer 
+        bee2Gj7bt70NVZ27DbdygDtLtVKD4d2V&timestamp=2021-08-01T09:05:25.311Z&body=', '6335d37c-4a33-4b90-afc0-87ce03fdb193');
+        // dd(date('Y-m-d H:i:s')); 
+        // dump($hash);
+        // dump(base64_encode($hash));
+        // dump(base64_decode(base64_encode($hash)));
+        // dd(base64_decode('OzFKfUSTfwsyXXkoTfXuPsFj9lRD3eE8gwCbOkBFbI='));
         return view('master.page.index', [
             // 'breadcrumbs' => $breadcrumbs
             'pageConfigs'   => $this->pageConfigs,

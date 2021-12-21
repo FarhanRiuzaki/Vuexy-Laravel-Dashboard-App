@@ -1,42 +1,54 @@
 {
   "menu": [
     {
-      "navheader": "Master Dashboard",
+      "url": "/",
+      "name": "Dashboard",
+      "icon": "home",
+      "slug": "dashboard"
+    },
+    {
+      "navheader": "MPC",
       "slug": "",
-      "permission":  ["channel.index", "merchant.index"]
+      "permission": ["audit.index"]
     },
     {
-      "url": "channels",
-      "name": "Master Channel",
-      "icon": "grid",
-      "slug": "channels",
-      "permission": "channel.index"
+      "url": "audits",
+      "name": "Audit Trails",
+      "icon": "activity",
+      "slug": "audits",
+      "permission": "audit.index"
     },
     {
-      "url": "merchants",
-      "name": "Master Merchant",
-      "icon": "package",
-      "slug": "merchants",
-      "permission": "merchant.index"
-    },
-    {
-      "navheader": "Master Template",
+      "navheader": "Bulk",
       "slug": "",
-      "permission":  ["page-template.index", "component-template.index"]
+      "permission": ["upload-bulk.index","approve-bulk.index"]
     },
     {
-      "url": "pages",
-      "name": "Page",
-      "icon": "file-text",
-      "slug": "pages",
-      "permission": "page-template.index"
+      "url": "upload-bulks",
+      "name": "Upload",
+      "icon": "upload-cloud",
+      "slug": "upload-bulks",
+      "permission": "upload-bulk.index"
     },
     {
-      "url": "components",
-      "name": "Component",
-      "icon": "command",
-      "slug": "components",
-      "permission": "component-template.index"
+      "url": "approve-bulks",
+      "name": "Approve",
+      "icon": "check-square",
+      "slug": "approve-bulks",
+      "permission": "approve-bulk.index"
+    },
+    {
+      "navheader": "Sys",
+      "slug": "",
+      "permission": ["master-account.index"]
+
+    },
+    {
+      "url": "master-accounts",
+      "name": "Master Rekening",
+      "icon": "clipboard",
+      "slug": "master-accounts",
+      "permission": "master-account.index"
     },
     {
       "navheader": "Auth Apps",
@@ -46,7 +58,7 @@
     {
       "url": "permissions",
       "name": "Permission",
-      "icon": "sidebar",
+      "icon": "command",
       "slug": "permissions",
       "permission": "permission.index"
     },

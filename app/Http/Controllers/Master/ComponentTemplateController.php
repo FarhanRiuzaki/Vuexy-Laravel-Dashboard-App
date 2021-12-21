@@ -79,17 +79,17 @@ class ComponentTemplateController extends Controller
 
         $requestData    = $request->All();
 
-        $compo_page     = $requestData['component_has_page'];
-        $param_api      = $requestData['component_parameter_api'];
+        $compo_page     = isset($requestData['component_has_page']) == true ? $requestData['component_has_page'] : false;
+        $param_api      = isset($requestData['component_parameter_api']) == true ? $requestData['component_parameter_api'] : false;
         
         unset($requestData['component_has_page']);
         unset($requestData['component_parameter_api']);
         
         DB::beginTransaction();
         try {
-            $component = Component::create($requestData);
-            $component->componentParameterApi()->createMany($param_api);
-            $component->componentHasPage()->createMany($compo_page);
+            $component  = Component::create($requestData);
+            $compo_page  == true ? $component->componentHasPage()->createMany($compo_page) : false;
+            $param_api == true ? $component->componentParameterApi()->createMany($param_api) : false;
 
             DB::commit();
         } catch (\Throwable $th) {
@@ -175,9 +175,9 @@ class ComponentTemplateController extends Controller
         
         $requestData    = $request->All();
 
-        $compo_page     = $requestData['component_has_page'];
-        $param_api      = $requestData['component_parameter_api'];
-        
+        $compo_page     = isset($requestData['component_has_page']) == true ? $requestData['component_has_page'] : false;
+        $param_api      = isset($requestData['component_parameter_api']) == true ? $requestData['component_parameter_api'] : false;
+        // dd($compo_page);
         unset($requestData['component_has_page']);
         unset($requestData['component_parameter_api']);
         
@@ -187,11 +187,11 @@ class ComponentTemplateController extends Controller
             $updateData = Component::find($id);
             $updateData->update($requestData);
             // delete param_api
-            $updateData->componentParameterApi()->delete();
-            $updateData->componentHasPage()->delete();
+            $param_api  == true ? $updateData->componentParameterApi()->delete() : false;
+            $compo_page == true ? $updateData->componentHasPage()->delete() : false;
             // store new param_api ke child (componentParameterApi)
-            $updateData->componentParameterApi()->createMany($param_api);
-            $updateData->componentHasPage()->createMany($compo_page);
+            $param_api  == true ? $updateData->componentParameterApi()->createMany($param_api) : false;
+            $compo_page == true ? $updateData->componentHasPage()->createMany($compo_page) : false;
 
             DB::commit();
         } catch (\Throwable $th) {

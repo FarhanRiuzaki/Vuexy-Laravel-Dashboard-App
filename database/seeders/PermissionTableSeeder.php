@@ -28,6 +28,22 @@ class PermissionTableSeeder extends Seeder
             'permission.create',
             'permission.edit',
             'permission.delete',
+            'audit.index',
+            'audit.create',
+            'audit.edit',
+            'audit.delete',
+            'upload-bulk.index',
+            'upload-bulk.create',
+            'upload-bulk.edit',
+            'upload-bulk.delete',
+            'approve-bulk.index',
+            'approve-bulk.create',
+            'approve-bulk.edit',
+            'approve-bulk.delete',
+            'master-account.index',
+            'master-account.create',
+            'master-account.edit',
+            'master-account.delete',
          ];
       
          foreach ($permissions as $permission) {

@@ -20,7 +20,6 @@
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-12 mt-50">
                                     {{ Form::inputText('Name: ', 'name', null, null, ['placeholder' => 'Name', 'required']) }}
-                                    {{ Form::inputText('Name: ', 'merchant_id', null, null, ['placeholder' => 'Name', 'required']) }}
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">

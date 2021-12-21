@@ -11,8 +11,8 @@
 @endif
 <script src="{{ asset('js/scripts/custom.js') }}"></script>
 <script src="{{ asset('/js/scripts/documentation.js') }}"></script>
-
 {{-- page script --}}
 @stack('page-script')
 @yield('page-script')
 {{-- page script --}}
+

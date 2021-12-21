@@ -24,7 +24,7 @@ class UserSeeder extends Seeder
         ]);
 
         // sync user Farhan Riuzaki to role super admin
-        // $user->syncRoles(['super-admin']);
+        $user->syncRoles(['super-admin']);
 
     }
 }

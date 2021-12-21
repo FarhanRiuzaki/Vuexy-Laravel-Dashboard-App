@@ -14,7 +14,9 @@ trait RecordSignatureUUID
         parent::boot();
 
         static::updating(function ($model) {
-            $model->updated_by = Auth::User()->id;
+            if(Auth::User() != null){
+                $model->updated_by = Auth::User()->id;
+            }
         });
 
         static::creating(function ($model) {

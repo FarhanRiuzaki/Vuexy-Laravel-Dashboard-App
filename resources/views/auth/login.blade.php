@@ -13,15 +13,15 @@
 <div class="auth-wrapper auth-v2">
   <div class="auth-inner row m-0">
       <!-- Brand logo-->
-      <a class="brand-logo" href="{{ url('/') }}" style="margin-left: 17% !important; margin-top: 2% !important">
-        <img src="{{ asset('landingPage/img/logo-light.png') }}" alt="" style="max-height: 50px">
-        <h2 class="brand-text text-warning ml-1 mt-50"><i>Dashboard </i>MSMILE</h2>
+      <a class="brand-logo" href="{{ url('/') }}" style="margin-left: 10% !important; margin-top: 2% !important">
+        <img src="{{ asset('images/icons/mega (2).png') }}" alt="" style="max-height: 50px">
+        <h2 class="brand-text text-warning ml-1 mt-50"><i>Dashboard Back office </i>Point System</h2>
       </a>
       <!-- /Brand logo-->
       <!-- Left Text-->
       <div class="d-none d-lg-flex col-lg-8 align-items-center p-5">
         <div class="w-100 d-lg-flex align-items-center justify-content-center px-5">
-          <img class="img-fluid" src="{{asset('images/pages/Data report-pana.svg')}}" alt="Login V2" />
+          <img class="img-fluid" src="{{asset('images/pages/login-svg.svg')}}" alt="Login V2" style="max-height: 500px"/>
           {{-- <img class="img-fluid" src="{{asset('images/pages/login-v2.svg')}}" alt="Login V2" /> --}}
         </div>
       </div>
@@ -67,14 +67,14 @@
             <span>New on our platform?</span>
             <a href="{{url('auth/register-v2')}}"><span>&nbsp;Create an account</span></a>
           </p> --}}
-          <p class="text-center mt-2">
+          {{-- <p class="text-center mt-2">
             <span>New on our platform?</span>
             @if (Route::has('register'))
             <a href="{{ route('register') }}">
               <span class="text-warning">Create an account</span>
             </a>
             @endif
-          </p>
+          </p> --}}
 
       </div>
     </div>
