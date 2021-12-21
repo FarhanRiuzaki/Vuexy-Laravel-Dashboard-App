@@ -6,7 +6,7 @@ use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Contracts\Permission;
-use Spatie\Permission\Models\Permission as ModelsPermission;
+use App\Models\Permission as ModelsPermission;
 use Yajra\DataTables\Facades\DataTables;
 
 class PermissionController extends Controller
@@ -19,10 +19,10 @@ class PermissionController extends Controller
     function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('permission:'.$this->permission.'.index|'.$this->permission.'.create|'.$this->permission.'.edit|'.$this->permission.'.delete', ['only' => ['index','store']]);
-        $this->middleware('permission:'.$this->permission.'.create', ['only' => ['create','store']]);
-        $this->middleware('permission:'.$this->permission.'.edit', ['only' => ['edit','update']]);
-        $this->middleware('permission:'.$this->permission.'.delete', ['only' => ['destroy']]);
+        $this->middleware('permission:' . $this->permission . '.index|' . $this->permission . '.create|' . $this->permission . '.edit|' . $this->permission . '.delete', ['only' => ['index', 'store']]);
+        $this->middleware('permission:' . $this->permission . '.create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:' . $this->permission . '.edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:' . $this->permission . '.delete', ['only' => ['destroy']]);
     }
     /**
      * Display a listing of the resource.
@@ -34,7 +34,7 @@ class PermissionController extends Controller
         $permission     = DB::table('permissions')->orderBy('name', 'DESC')->get();
         // Format bentuk data untuk autocomplete.
         $output = [];
-        foreach($permission as $data) {
+        foreach ($permission as $data) {
             $output[] = [
                 'value'     => $data->name,
                 'data'      => $data->name
@@ -60,7 +60,7 @@ class PermissionController extends Controller
         $role->syncPermissions(ModelsPermission::all());
 
         return redirect()->route('permissions.index')
-        ->with(toaster('Permissions created successfully', 'success', 'Success'));
+            ->with(toaster('Permissions created successfully', 'success', 'Success'));
     }
 
     /**
@@ -76,7 +76,7 @@ class PermissionController extends Controller
         $permission         = DB::table('permissions')->orderBy('name', 'DESC')->get();
         // Format bentuk data untuk autocomplete.
         $output = [];
-        foreach($permission as $data) {
+        foreach ($permission as $data) {
             $output[] = [
                 'value'     => $data->name,
                 'data'      => $data->name
@@ -88,7 +88,7 @@ class PermissionController extends Controller
             'pageConfigs'   => $this->pageConfigs,
             'page_title'    => $this->page_title,
             'route'         => $this->route,
-            'permission_edit'=>$permission_edit,
+            'permission_edit' => $permission_edit,
             'autocomplete'  => $autocomplete
         ]);
     }
@@ -102,7 +102,7 @@ class PermissionController extends Controller
         $Permission->update($input);
 
         return redirect()->route('permissions.index')
-        ->with(toaster('Permission updated successfully', 'success', 'Success'));
+            ->with(toaster('Permission updated successfully', 'success', 'Success'));
     }
 
 
@@ -124,35 +124,35 @@ class PermissionController extends Controller
 
     public function datatable(Request $req)
     {
-        if($req->ajax()){
+        if ($req->ajax()) {
             $this->type = $req['type'];
             $model      = DB::table('permissions')->orderBy('name', 'DESC');
 
             return DataTables::of($model)
-            ->addIndexColumn()
-            ->addColumn('group', function($data){
-                $render = $data->name;
-                $render = explode('.', $render);
-                return $render[0];
-            })
-            ->addColumn('action', function($data){
-                $button = '';
-                if(auth()->user()->can('permission.edit')){
-                    $button .= ' <a href="' . route($this->route.'.edit',$data->id) . '" class="btn btn-icon btn-primary btn-sm"  data-toggle="tooltip" title="Edit">
-                    '.SVGI('bi-pencil-square').'
+                ->addIndexColumn()
+                ->addColumn('group', function ($data) {
+                    $render = $data->name;
+                    $render = explode('.', $render);
+                    return $render[0];
+                })
+                ->addColumn('action', function ($data) {
+                    $button = '';
+                    if (auth()->user()->can('permission.edit')) {
+                        $button .= ' <a href="' . route($this->route . '.edit', $data->id) . '" class="btn btn-icon btn-primary btn-sm"  data-toggle="tooltip" title="Edit">
+                    ' . SVGI('bi-pencil-square') . '
                     </a>';
-                }
-                if($this->type == 'create'){
-                    if(auth()->user()->can('permission.delete')){
-                        $button .= ' <button class="btn btn-icon btn-sm btn-delete btn-danger" data-remote="'. route($this->route . '.destroy', $data->id) .'" data-toggle="tooltip" title="Delete">
-                            '.SVGI('bi-trash').'
-                        </button>';
                     }
-                }
-                return $button;
-            })
-            ->rawColumns(['action'])
-            ->make(true);
+                    if ($this->type == 'create') {
+                        if (auth()->user()->can('permission.delete')) {
+                            $button .= ' <button class="btn btn-icon btn-sm btn-delete btn-danger" data-remote="' . route($this->route . '.destroy', $data->id) . '" data-toggle="tooltip" title="Delete">
+                            ' . SVGI('bi-trash') . '
+                        </button>';
+                        }
+                    }
+                    return $button;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
         }
     }
 }
